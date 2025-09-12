@@ -139,7 +139,7 @@ export const cvData = {
       },
       languages: {
         title: "語言能力",
-        content: "中文（母語）| 英文（精通）"
+        content: "中文（母語）| 英文（精通  多益 870, 雅思 6.5）"
       },
       personality: {
         title: "個人特質",
@@ -295,7 +295,7 @@ subProjects: [
       },
       languages: {
         title: "Languages",
-        content: "Chinese (Native) | English (Proficient)"
+        content: "Chinese (Native) | English (Proficient | TOEIC 870, IELTS 6.5)"
       },
       personality: {
         title: "Personal Traits",
