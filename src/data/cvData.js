@@ -46,7 +46,8 @@ export const cvData = {
               "建立 LLM 背景資料維護框架（context、column description…），確保系統可持續、穩定維護",
               "經常負責協助 程式碼重構與最佳化，憑藉清晰的架構設計直覺與 AI 工具整合能力，顯著提升專案品質",
               "擔任團隊 Git 專家，協助版本控管流程設計與問題解決"
-            ]
+            ],
+            image: "/Me/imgs/accton.jpg"
           },
           {
             company: "台灣積體電路製造股份有限公司 (TSMC)",
