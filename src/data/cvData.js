@@ -17,10 +17,10 @@ export const cvData = {
             degree: "管理科學系、資訊工程學系 雙主修",
             period: "2020.09 - 2025",
             details: [
-              "GPA: 總平均：3.53 (207學分) 系上排名約50%",
+              "GPA: 總平均：3.53 (207學分) 系上排名60%",
               "課程表現：人工智慧概論（A+）（排名2/135）、進階物件導向程式設計（A+）、機器學習導論（A）、資料庫系統導論（A）、前端網頁系統開發概論（A+）"
             ],
-            transcript: "https://drive.google.com/file/d/1XDerdsdUbl4nnVDsqubJbxPvKZfzUoPh/view?usp=sharing"
+            transcript: "https://drive.google.com/file/d/1GWsNsBEHQsyV--4gdBoJuB9koXrW8UZZ/view"
           }
         ]
       },
@@ -139,7 +139,8 @@ export const cvData = {
       },
       languages: {
         title: "語言能力",
-        content: "中文（母語）| 英文（精通  多益 870, 雅思 6.5）"
+        content: "中文（母語）| 英文（精通  多益 870, 雅思 6.5）",
+        ieltsTranscript: "/Me/imgs/雅思成績單_page-0001.jpg"
       },
       personality: {
         title: "個人特質",
@@ -295,7 +296,8 @@ subProjects: [
       },
       languages: {
         title: "Languages",
-        content: "Chinese (Native) | English (Proficient | TOEIC 870, IELTS 6.5)"
+        content: "Chinese (Native) | English (Proficient | TOEIC 870, IELTS 6.5)",
+        ieltsTranscript: "/Me/imgs/雅思成績單_page-0001.jpg"
       },
       personality: {
         title: "Personal Traits",
