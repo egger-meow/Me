@@ -38,7 +38,7 @@ export const cvData = {
           {
             company: "Accton Technology Corp.",
             position: "RD-軟體工程實習生",
-            period: "2025.03 - 現在",
+            period: "2025.03 - 2025.09",
             achievements: [
               "主導測試機器 Log Parsing 框架設計，目前仍為生產環境 Dashboard Backend 的核心；另開發 Drain3+RuleParser，已完成並被團隊延伸開發",
               "Log Kafka + TimescaleDB 串聯框架（streaming)：設計並開發完整 pipeline，已成功通過環境測試，為日後大規模時序資料處理奠定基礎",
@@ -46,7 +46,20 @@ export const cvData = {
               "建立 LLM 背景資料維護框架（context、column description…），確保系統可持續、穩定維護",
               "經常負責協助 程式碼重構與最佳化，憑藉清晰的架構設計直覺與 AI 工具整合能力，顯著提升專案品質",
               "擔任團隊 Git 專家，協助版本控管流程設計與問題解決"
-            ]
+            ],
+            image: "/Me/imgs/accton.jpg"
+          },
+          {
+            company: "優式資本 UC Capital",
+            position: "AI 量化新星計畫徵選（未錄取）",
+            period: "2025.06",
+            achievements: [
+              "從 942 位申請者中脫穎而出，受邀參與徵選說明會與筆試測驗（共計 114 人入選，最終錄取約 10–20 人）",
+              "參與數學與邏輯筆試測驗，展現運算思維與問題解決能力",
+              "與 AWS 台灣區總經理、雲端架構師及優式資本創辦人互動交流，深入了解 AI 在量化金融領域的應用前景",
+              "最終未被錄取，但在嚴格競爭過程中展現自身能力，並累積量化與金融科技交叉領域的寶貴經驗"
+            ],
+            image: "/Me/imgs/優勢資本.jpg"
           },
           {
             company: "台灣積體電路製造股份有限公司 (TSMC)",
@@ -59,18 +72,6 @@ export const cvData = {
               "實踐 Scrum 敏捷開發流程，參與每日站立會議與迭代交付"
             ],
             image: "/Me/imgs/tsmc.jpg"
-          },
-          {
-            company: "優式資本 UC Capital",
-            position: "AI 量化新星計畫徵選",
-            period: "2025.06",
-            achievements: [
-              "從 942 位申請者中脫穎而出，受邀參與徵選說明會與筆試測驗（共計 114 人入選，最終錄取約 10–20 人）",
-              "參與數學與邏輯筆試測驗，展現運算思維與問題解決能力",
-              "與 AWS 台灣區總經理、雲端架構師及優式資本創辦人互動交流，深入了解 AI 在量化金融領域的應用前景",
-              "雖最終未能進入正式錄取名額，但仍在嚴格競爭過程中展現自身能力，並累積量化與金融科技交叉領域的寶貴經驗"
-            ],
-            image: "/Me/imgs/優勢資本.jpg"
           }
         ]
       },
@@ -198,8 +199,8 @@ export const cvData = {
           {
             company: "Accton Technology Corp.",
             position: "Intern",
-            period: "2025.03 - Present",
-achievements: [
+            period: "2025.03 - 2025.09",
+            achievements: [
               "Led test machine Log Parsing framework design, still serving as core for production Dashboard Backend; developed Drain3+RuleParser, completed and extended by team",
               "Log Kafka + TimescaleDB streaming framework: Designed and developed complete pipeline, successfully passed environment testing, laying foundation for future large-scale time-series data processing",
               "LLM-SQL Integration: Adopted lightweight VANNA framework combined with advanced RSL-SQL algorithm (excellent performance in BIRD benchmark)",
@@ -209,28 +210,28 @@ achievements: [
             ]
           },
           {
+            company: "UC Capital",
+            position: "AI Quantitative Rising Star Program Selection (Not Accepted)",
+            period: "2025.06",
+            achievements: [
+              "Selected from 942 applicants, invited to selection briefing and written test (114 selected, final acceptance ~10-20)",
+              "Participated in mathematics and logic written test, demonstrating computational thinking and problem-solving abilities",
+              "Interacted with AWS Taiwan General Manager, cloud architects, and UC Capital founder, gaining deep understanding of AI applications in quantitative finance",
+              "Was not accepted in the final selection, but demonstrated capabilities in rigorous competition and gained valuable experience in quantitative and fintech cross-domain"
+            ],
+            image: "/Me/imgs/優勢資本.jpg"
+          },
+          {
             company: "Taiwan Semiconductor Manufacturing Company (TSMC)",
             position: "Software Engineering Intern",
             period: "2024.07 - 2024.08",
-achievements: [
+            achievements: [
               "Served as full-stack developer in IT Department (BSID), participated in global employee leave management system development, optimizing user experience and system performance",
               "Fine-tuned system details and differentiated features for two regional employee needs, ensuring cross-regional user accuracy and consistent experience",
               "Technologies: TypeScript (React), Java, Azure DevOps, CI/CD",
               "Practiced Scrum agile development, participated in daily stand-ups and iterative delivery"
             ],
             image: "/Me/imgs/tsmc.jpg"
-          },
-          {
-            company: "UC Capital",
-            position: "AI Quantitative Rising Star Program Selection",
-            period: "2025.06",
-achievements: [
-              "Selected from 942 applicants, invited to selection briefing and written test (114 selected, final acceptance ~10-20)",
-              "Participated in mathematics and logic written test, demonstrating computational thinking and problem-solving abilities",
-              "Interacted with AWS Taiwan General Manager, cloud architects, and UC Capital founder, gaining deep understanding of AI applications in quantitative finance",
-              "Though not finally accepted, demonstrated capabilities in rigorous competition and gained valuable experience in quantitative and fintech cross-domain"
-            ],
-            image: "/Me/imgs/優勢資本.jpg"
           }
         ]
       },

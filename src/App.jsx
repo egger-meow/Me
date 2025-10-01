@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { cvData } from './data/cvData';
-import { Download, Globe, Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Sun, Moon, X } from 'lucide-react';
+import { Download, Globe, Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Sun, Moon, X, Award } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import Galaxy from './components/Galaxy';
 import { useScrollAnimation } from './hooks/useScrollAnimation';
+import { useLanguageTransition } from './hooks/useLanguageTransition';
+import TypingAnimation from './components/TypingAnimation';
+import Timeline from './components/Timeline';
+import IELTSViewer from './components/IELTSViewer';
+import VisitorCounter from './components/VisitorCounter';
 
 const ImageModal = ({ isOpen, onClose, imageUrl, altText }) => {
   if (!isOpen) return null;
@@ -44,9 +49,11 @@ const ImageModal = ({ isOpen, onClose, imageUrl, altText }) => {
 };
 
 function App() {
-  const [language, setLanguage] = useState('zh');
+  const { language, toggleLanguage: handleLanguageToggle, isTransitioning } = useLanguageTransition('zh');
   const [theme, setTheme] = useState('light');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [showIELTS, setShowIELTS] = useState(false);
+  const [typingComplete, setTypingComplete] = useState(false);
   const resumeRef = useRef(null);
   const data = cvData[language];
   
@@ -72,7 +79,7 @@ function App() {
   const [personalityRef, personalityVisible] = useScrollAnimation({ threshold: 0.2, delay: 700 });
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'zh' ? 'en' : 'zh');
+    handleLanguageToggle();
   };
 
   const toggleTheme = () => {
@@ -285,9 +292,19 @@ function App() {
           <div className="p-8 md:p-12">
             {/* Header */}
             <header className="mb-8">
-              <h1 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
+              <h1 className={`text-4xl font-bold mb-4 transition-all duration-500 transform ${
                 isDark ? 'text-white' : 'text-gray-900'
-              }`}>{data.name}</h1>
+              } ${
+                isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+              }`}>
+                <TypingAnimation 
+                  text={data.name} 
+                  speed={120} 
+                  delay={1000}
+                  className="inline-block"
+                  onComplete={() => setTypingComplete(true)}
+                />
+              </h1>
               <div className={`flex flex-wrap gap-4 text-sm transition-colors duration-300 ${
                 isDark ? 'text-gray-300' : 'text-gray-600'
               }`}>
@@ -324,7 +341,7 @@ function App() {
               isDark ? 'border-gray-600' : 'border-gray-300'
             }`} />
 
-            {/* Education */}
+            {/* Education Timeline */}
             <section 
               ref={(el) => {
                 sectionRefs.education.current = el;
@@ -336,45 +353,16 @@ function App() {
                   : 'opacity-0 translate-y-8'
               }`}
             >
-              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
+              <h2 className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
                 isDark ? 'text-white' : 'text-gray-800'
               }`}>{data.sections.education.title}</h2>
-              {data.sections.education.content.map((edu, index) => (
-                <div key={index}>
-                  <div className="mb-2">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className={`text-lg font-semibold transition-colors duration-300 ${
-                          isDark ? 'text-white' : 'text-gray-900'
-                        }`}>{edu.school}</h3>
-                        <p className={`transition-colors duration-300 ${
-                          isDark ? 'text-gray-300' : 'text-gray-700'
-                        }`}>{edu.degree}</p>
-                      </div>
-                      <span className={`transition-colors duration-300 ${
-                        isDark ? 'text-gray-400' : 'text-gray-600'
-                      }`}>{edu.period}</span>
-                    </div>
-                  </div>
-                  <ul className={`list-disc list-inside ml-4 space-y-1 transition-colors duration-300 ${
-                    isDark ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    {edu.details.map((detail, idx) => (
-                      <li key={idx}>{detail}</li>
-                    ))}
-                    {edu.transcript && (
-                      <li>
-                        <a href={edu.transcript} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 hover:underline transition-colors ${
-                          isDark ? 'text-blue-400' : 'text-blue-600'
-                        }`}>
-                          {language === 'zh' ? '歷年成績單' : 'Transcript'}
-                          <ExternalLink size={14} />
-                        </a>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              ))}
+              <Timeline 
+                items={data.sections.education.content}
+                isDark={isDark}
+                language={language}
+                type="education"
+                onImageClick={setSelectedImage}
+              />
             </section>
 
             <hr className={`border-t mb-8 transition-colors duration-300 ${
@@ -422,7 +410,7 @@ function App() {
               isDark ? 'border-gray-600' : 'border-gray-200'
             }`} />
 
-            {/* Experience */}
+            {/* Experience Timeline */}
             <section 
               ref={(el) => {
                 sectionRefs.experience.current = el;
@@ -434,43 +422,16 @@ function App() {
                   : 'opacity-0 translate-y-8'
               }`}
             >
-              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
+              <h2 className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
                 isDark ? 'text-white' : 'text-gray-800'
               }`}>{data.sections.experience.title}</h2>
-              {data.sections.experience.content.map((exp, index) => (
-                <div key={index} className="mb-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className={`text-lg font-semibold transition-colors duration-300 ${
-                        isDark ? 'text-white' : 'text-gray-900'
-                      }`}>{exp.company}</h3>
-                      <p className={`transition-colors duration-300 ${
-                        isDark ? 'text-gray-300' : 'text-gray-700'
-                      }`}>{exp.position}</p>
-                    </div>
-                    <span className={`transition-colors duration-300 ${
-                      isDark ? 'text-gray-400' : 'text-gray-600'
-                    }`}>{exp.period}</span>
-                  </div>
-                  <ul className={`list-disc list-inside ml-4 space-y-1 transition-colors duration-300 ${
-                    isDark ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    {exp.achievements.map((achievement, idx) => (
-                      <li key={idx}>{achievement}</li>
-                    ))}
-                  </ul>
-                  {exp.image && (
-                    <div className="mt-3">
-                      <img
-                        src={exp.image}
-                        alt={exp.company}
-                        className="max-w-md h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                        onClick={() => setSelectedImage({ url: exp.image, alt: exp.company })}
-                      />
-                    </div>
-                  )}
-                </div>
-              ))}
+              <Timeline 
+                items={data.sections.experience.content}
+                isDark={isDark}
+                language={language}
+                type="experience"
+                onImageClick={setSelectedImage}
+              />
             </section>
 
             <hr className={`border-t mb-8 transition-colors duration-300 ${
@@ -695,9 +656,24 @@ function App() {
               <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
                 isDark ? 'text-white' : 'text-gray-800'
               }`}>{data.sections.languages.title}</h2>
-              <p className={`transition-colors duration-300 ${
-                isDark ? 'text-gray-300' : 'text-gray-700'
-              }`}>{data.sections.languages.content}</p>
+              <div className="flex flex-wrap items-center gap-4">
+                <p className={`transition-colors duration-300 ${
+                  isDark ? 'text-gray-300' : 'text-gray-700'
+                }`}>{data.sections.languages.content}</p>
+                {data.sections.languages.ieltsTranscript && (
+                  <button
+                    onClick={() => setShowIELTS(true)}
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 transform ${
+                      isDark
+                        ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 border border-emerald-500/30'
+                        : 'bg-blue-100 hover:bg-blue-200 text-blue-700 border border-blue-200'
+                    }`}
+                  >
+                    <Award size={16} />
+                    {language === 'zh' ? '查看 IELTS 成績單' : 'View IELTS Certificate'}
+                  </button>
+                )}
+              </div>
             </section>
 
             <hr className={`border-t mb-8 transition-colors duration-300 ${
@@ -742,6 +718,21 @@ function App() {
         onClose={() => setSelectedImage(null)}
         imageUrl={selectedImage?.url}
         altText={selectedImage?.alt}
+      />
+      
+      {/* IELTS Certificate Viewer */}
+      <IELTSViewer
+        isOpen={showIELTS}
+        onClose={() => setShowIELTS(false)}
+        imageUrl={data.sections.languages.ieltsTranscript}
+        isDark={isDark}
+        language={language}
+      />
+      
+      {/* Visitor Counter */}
+      <VisitorCounter
+        isDark={isDark}
+        language={language}
       />
     </div>
   );
