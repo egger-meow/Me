@@ -18,7 +18,7 @@ export const cvData = {
             period: "2020.09 - 2025",
             details: [
               "GPA: 總平均：3.53 (207學分) 系上排名60%",
-              "課程表現：人工智慧概論（A+）（排名2/135）、進階物件導向程式設計（A+）、機器學習導論（A）、資料庫系統導論（A）、前端網頁系統開發概論（A+）"
+              "課程表現：人工智慧概論（A+）（排名2/113）、進階物件導向程式設計（A+）、機器學習導論（A）、資料庫系統導論（A）、前端網頁系統開發概論（A+）"
             ],
             transcript: "https://drive.google.com/file/d/1GWsNsBEHQsyV--4gdBoJuB9koXrW8UZZ/view"
           }
@@ -47,7 +47,7 @@ export const cvData = {
               "經常負責協助 程式碼重構與最佳化，憑藉清晰的架構設計直覺與 AI 工具整合能力，顯著提升專案品質",
               "擔任團隊 Git 專家，協助版本控管流程設計與問題解決"
             ],
-            image: "/Me/imgs/accton.jpg"
+            images: ["/Me/imgs/accton_page-0001.jpg","/Me/imgs/accton.jpg"]
           },
           {
             company: "台灣積體電路製造股份有限公司 (TSMC)",
@@ -59,20 +59,8 @@ export const cvData = {
               "使用技術：TypeScript (React)、Java、Azure DevOps、CI/CD",
               "實踐 Scrum 敏捷開發流程，參與每日站立會議與迭代交付"
             ],
-            image: "/Me/imgs/tsmc.jpg"
+            images: ["/Me/imgs/tsmc.jpg"]
           },
-          {
-            company: "優式資本 UC Capital",
-            position: "AI 量化新星計畫徵選",
-            period: "2025.06",
-            achievements: [
-              "從 942 位申請者中脫穎而出，受邀參與徵選說明會與筆試測驗（共計 114 人入選，最終錄取約 10–20 人）",
-              "參與數學與邏輯筆試測驗，展現運算思維與問題解決能力",
-              "與 AWS 台灣區總經理、雲端架構師及優式資本創辦人互動交流，深入了解 AI 在量化金融領域的應用前景",
-              "雖最終未能進入正式錄取名額，但仍在嚴格競爭過程中展現自身能力，並累積量化與金融科技交叉領域的寶貴經驗"
-            ],
-            image: "/Me/imgs/優勢資本.jpg"
-          }
         ]
       },
       projects: {
@@ -207,7 +195,8 @@ achievements: [
               "Established LLM background data maintenance framework (context, column description...), ensuring sustainable and stable system maintenance",
               "Frequently responsible for code refactoring and optimization, significantly improving project quality with clear architecture design intuition and AI tool integration capabilities",
               "Served as team Git expert, assisting with version control process design and problem solving"
-            ]
+            ],
+            images: ["/Me/imgs/accton.jpg"]
           },
           {
             company: "Taiwan Semiconductor Manufacturing Company (TSMC)",
@@ -219,20 +208,8 @@ achievements: [
               "Technologies: TypeScript (React), Java, Azure DevOps, CI/CD",
               "Practiced Scrum agile development, participated in daily stand-ups and iterative delivery"
             ],
-            image: "/Me/imgs/tsmc.jpg"
+            images: ["/Me/imgs/tsmc.jpg"]
           },
-          {
-            company: "UC Capital",
-            position: "AI Quantitative Rising Star Program Selection",
-            period: "2025.06",
-achievements: [
-              "Selected from 942 applicants, invited to selection briefing and written test (114 selected, final acceptance ~10-20)",
-              "Participated in mathematics and logic written test, demonstrating computational thinking and problem-solving abilities",
-              "Interacted with AWS Taiwan General Manager, cloud architects, and UC Capital founder, gaining deep understanding of AI applications in quantitative finance",
-              "Though not finally accepted, demonstrated capabilities in rigorous competition and gained valuable experience in quantitative and fintech cross-domain"
-            ],
-            image: "/Me/imgs/優勢資本.jpg"
-          }
         ]
       },
       projects: {

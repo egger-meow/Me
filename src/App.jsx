@@ -1,42 +1,105 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { cvData } from './data/cvData';
-import { Download, Globe, Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Sun, Moon, X } from 'lucide-react';
+import { Download, Globe, Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Sun, Moon, X, Image } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import Galaxy from './components/Galaxy';
 import { useScrollAnimation } from './hooks/useScrollAnimation';
 
-const ImageModal = ({ isOpen, onClose, imageUrl, altText }) => {
-  if (!isOpen) return null;
+const ImageModal = ({ isOpen, onClose, imageUrls = [], altText }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // 鎖背景捲動（可選）
+  // 鎖背景捲動
   useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = prev; };
-  }, []);
+    if (isOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [isOpen]);
+
+  // Reset index when modal opens
+  useEffect(() => {
+    if (isOpen) setCurrentIndex(0);
+  }, [isOpen]);
+  
+  if (!isOpen || imageUrls.length === 0) return null;
+
+  const handlePrevious = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === 0 ? imageUrls.length - 1 : prev - 1));
+  };
+
+  const handleNext = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === imageUrls.length - 1 ? 0 : prev + 1));
+  };
 
   return createPortal(
     <div
-      className="fixed inset-0 bg-black/75 flex items-center justify-center z-[9999]"
+      className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-[9999] p-4"
       onClick={onClose}
       aria-modal="true"
       role="dialog"
     >
-      <div className="relative max-w-5xl max-h-[90vh] p-4" onClick={e => e.stopPropagation()}>
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors"
-          aria-label="Close"
-        >
-          <X size={20} className="text-gray-800" />
-        </button>
-        <img
-          src={imageUrl}
-          alt={altText}
-          className="max-w-full max-h-[85vh] object-contain rounded-lg"
-        />
+      <div 
+        className="relative bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden" 
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/50 to-transparent p-4 z-10 flex items-center justify-between">
+          {imageUrls.length > 1 && (
+            <div className="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
+              {currentIndex + 1} / {imageUrls.length}
+            </div>
+          )}
+          <div className="flex-1"></div>
+          <button
+            onClick={onClose}
+            className="bg-white/90 backdrop-blur-sm rounded-full p-2 hover:bg-white transition-colors"
+            aria-label="Close"
+          >
+            <X size={20} className="text-gray-800" />
+          </button>
+        </div>
+        
+        {/* Image Container */}
+        <div className="relative w-full h-full flex items-center justify-center p-12">
+          <img
+            src={imageUrls[currentIndex]}
+            alt={`${altText} ${imageUrls.length > 1 ? `(${currentIndex + 1}/${imageUrls.length})` : ''}`}
+            className="max-w-full max-h-[70vh] object-contain"
+            onError={(e) => {
+              console.error('Image failed to load:', imageUrls[currentIndex]);
+              e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23f0f0f0" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23999"%3EImage not found%3C/text%3E%3C/svg%3E';
+            }}
+          />
+        </div>
+        
+        {/* Navigation Buttons */}
+        {imageUrls.length > 1 && (
+          <>
+            <button
+              onClick={handlePrevious}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm hover:bg-white rounded-full p-3 transition-colors shadow-lg"
+              aria-label="Previous"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button
+              onClick={handleNext}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm hover:bg-white rounded-full p-3 transition-colors shadow-lg"
+              aria-label="Next"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </>
+        )}
       </div>
     </div>,
     document.body
@@ -459,14 +522,19 @@ function App() {
                       <li key={idx}>{achievement}</li>
                     ))}
                   </ul>
-                  {exp.image && (
+                  {exp.images && exp.images.length > 0 && (
                     <div className="mt-3">
-                      <img
-                        src={exp.image}
-                        alt={exp.company}
-                        className="max-w-md h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                        onClick={() => setSelectedImage({ url: exp.image, alt: exp.company })}
-                      />
+                      <button
+                        onClick={() => setSelectedImage({ urls: exp.images, alt: exp.company })}
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${
+                          isDark
+                            ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 border border-slate-600'
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                        }`}
+                      >
+                        <Image size={16} />
+                        {language === 'zh' ? '查看相關證書' : 'View Certificates'}
+                      </button>
                     </div>
                   )}
                 </div>
@@ -740,7 +808,7 @@ function App() {
       <ImageModal
         isOpen={!!selectedImage}
         onClose={() => setSelectedImage(null)}
-        imageUrl={selectedImage?.url}
+        imageUrls={selectedImage?.urls || (selectedImage?.url ? [selectedImage.url] : [])}
         altText={selectedImage?.alt}
       />
     </div>
