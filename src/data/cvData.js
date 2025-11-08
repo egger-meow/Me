@@ -81,12 +81,12 @@ export const cvData = {
             subProjects: [
               {
                 name: "虛擬食物訂購服務後端系統",
-                description: "使用MySQL、JavaScript、JQuery、PHP及XAMPP，打造完整後端服務",
+                description: "使用MySQL、JavaScript、JQuery、PHP及XAMPP，打造完整後端服務 (資料庫系統課程專題)",
                 github: "https://github.com/egger-meow/DBproject"
               },
               {
                 name: "Wallpaper Sharing Platform",
-                description: "使用Bootstrap、Node.js與MongoDB開發壁紙分享平台，實現照片上傳、瀏覽、標籤搜尋、點讚功能",
+                description: "使用Bootstrap、Node.js與MongoDB開發壁紙分享平台，實現照片上傳、瀏覽、標籤搜尋、點讚功能 (前端網頁系統開發概論課程專題)",
                 image: "/Me/imgs/wallpaper.png",
                 github: "https://github.com/egger-meow/Wallpaper_Project"
               },
@@ -94,16 +94,16 @@ export const cvData = {
                 name: "電商平台（E-commerce Platform）",
                 description: "使用QT框架，以QMap作為資料儲存，實現商品搜尋、購物車管理、訂單處理及商品評價功能，並有效解決商品資料庫儲存問題（進階物件導向課程專題）",
                 image: "/Me/imgs/QT.png",
-                github: "https://github.com/egger-meow?tab=repositories"
+                github: "https://github.com/egger-meow/SHOPEE_QT"
               },
               {
                 name: "Mini Metro遊戲開發",
-                description: "使用C++及SDL2及物件導向程式設計(OOP)實作模擬經營地鐵遊戲，負責上下車演算法設計、乘客移動、物理加減速模擬及畫面輸出效果",
+                description: "使用C++及SDL2及物件導向程式設計(OOP)實作模擬經營地鐵遊戲，負責上下車演算法設計、乘客移動、物理加減速模擬及畫面輸出效果 (物件導向課程專題)",
                 image: "/Me/imgs/minimetro.png",
-                github: "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Ffile.notion.so%2Ff%2Ff%2F4d1d5705-9ce3-4350-82ed-c1b50f1cd96b%2Fff21d4f7-a327-439a-9fe7-b0df5e4fcd4b%2F109511100_%25E6%25A2%2581%25E6%25B5%25A9%25E5%2593%25B2_109511226_%25E6%25B9%25AF%25E7%259D%25BF%25E5%25BB%25B7_109700046_%25E4%25BE%25AF%25E5%259D%2587%25E9%25A0%25B2_Mini_Metro.docx%3Ftable%3Dblock%26id%3Da737f35f-d374-4a35-8061-c3bf0dfbbd81%26spaceId%3D4d1d5705-9ce3-4350-82ed-c1b50f1cd96b%26expirationTimestamp%3D1757721600000%26signature%3DX9S_i_E0ESQsOU1dNMjPJF5fqoaB0XT-cjy9DvOkhvA%26downloadName%3D109511100_%25E6%25A2%2581%25E6%25B5%25A9%25E5%2593%25B2_109511226_%25E6%25B9%25AF%25E7%259D%25BF%25E5%25BB%25B7_109700046_%25E4%25BE%25AF%25E5%259D%2587%25E9%25A0%25B2_Mini_Metro.docx&wdOrigin=BROWSELINK"
+                github: "https://docs.google.com/document/d/1Rya2Sh9H7-ad1qCRE5G3tJQL3_yUr4lzfzfxyyvYU2c/edit?usp=sharing"
               }
             ],
-            note: "另外許多因自身興趣或朋友需求而開發的專案都可以參閱我的 github 連結",
+            note: "另外許多因自身興趣，朋友需求，或課程而開發的專案都可以參閱我的 github 連結",
             github: "https://github.com/egger-meow?tab=repositories"
           }
         ]
@@ -230,23 +230,26 @@ achievements: [
 subProjects: [
               {
                 name: "Virtual Food Ordering Service Backend System",
-                description: "Built complete backend service using MySQL, JavaScript, jQuery, PHP, and XAMPP"
+                description: "Built complete backend service using MySQL, JavaScript, jQuery, PHP, and XAMPP (Database System course project)",
+                github: "https://github.com/egger-meow/DBproject.git"
               },
               {
                 name: "Wallpaper Sharing Platform",
-                description: "Developed wallpaper sharing platform using Bootstrap, Node.js, and MongoDB, implementing photo upload, browsing, tag search, and like features",
-                image: "/Me/imgs/wallpaper.png"
+                description: "Developed wallpaper sharing platform using Bootstrap, Node.js, and MongoDB, implementing photo upload, browsing, tag search, and like features (Front-end Web System Development course project)",
+                image: "/Me/imgs/wallpaper.png",
+                github: "https://github.com/egger-meow/Wallpaper_Project.git"
               },
               {
                 name: "E-commerce Platform",
                 description: "Used QT framework with QMap for data storage, implemented product search, cart management, order processing, and product reviews (Advanced OOP course project)",
-                image: "/Me/imgs/QT.png"
+                image: "/Me/imgs/QT.png",
+                github: "https://github.com/egger-meow/SHOPEE_QT.git"
               },
               {
                 name: "Mini Metro Game Development",
-                description: "Implemented subway management simulation game using C++ and SDL2 with OOP, responsible for boarding/alighting algorithms, passenger movement, physics acceleration/deceleration simulation, and visual output",
+                description: "Implemented subway management simulation game using C++ and SDL2 with OOP, responsible for boarding/alighting algorithms, passenger movement, physics acceleration/deceleration simulation, and visual output (OOP course project)",
                 image: "/Me/imgs/minimetro.png",
-                link: "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Ffile.notion.so%2Ff%2Ff%2F4d1d5705-9ce3-4350-82ed-c1b50f1cd96b%2Fff21d4f7-a327-439a-9fe7-b0df5e4fcd4b%2F109511100_%25E6%25A2%2581%25E6%25B5%25A9%25E5%2593%25B2_109511226_%25E6%25B9%25AF%25E7%259D%25BF%25E5%25BB%25B7_109700046_%25E4%25BE%25AF%25E5%259D%2587%25E9%25A0%25B2_Mini_Metro.docx%3Ftable%3Dblock%26id%3Da737f35f-d374-4a35-8061-c3bf0dfbbd81%26spaceId%3D4d1d5705-9ce3-4350-82ed-c1b50f1cd96b%26expirationTimestamp%3D1757721600000%26signature%3DX9S_i_E0ESQsOU1dNMjPJF5fqoaB0XT-cjy9DvOkhvA%26downloadName%3D109511100_%25E6%25A2%2581%25E6%25B5%25A9%25E5%2593%25B2_109511226_%25E6%25B9%25AF%25E7%259D%25BF%25E5%25BB%25B7_109700046_%25E4%25BE%25AF%25E5%259D%2587%25E9%25A0%25B2_Mini_Metro.docx&wdOrigin=BROWSELINK"
+                github: "https://docs.google.com/document/d/1Rya2Sh9H7-ad1qCRE5G3tJQL3_yUr4lzfzfxyyvYU2c/edit?usp=sharing"
               }
             ],
             note: "Many other projects developed out of personal interest or friends' needs can be found on my GitHub",
