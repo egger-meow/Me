@@ -167,7 +167,7 @@ export const cvData = {
             period: "2020.09 - 2025",
             details: [
               "GPA: 3.53 (207 credits) Department ranking: ~50%",
-              "Course Performance: Introduction to AI (A+, Rank 2/135), Advanced OOP (A+), Introduction to ML (A), Database Systems (A), Frontend Web Development (A+)"
+              "Course Performance: Introduction to AI (A+, Rank 2/113), Advanced OOP (A+), Introduction to ML (A), Database Systems (A), Frontend Web Development (A+)"
             ],
             transcript: "https://drive.google.com/file/d/1XDerdsdUbl4nnVDsqubJbxPvKZfzUoPh/view?usp=sharing"
           }
