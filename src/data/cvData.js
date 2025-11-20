@@ -17,7 +17,7 @@ export const cvData = {
             degree: "管理科學系、資訊工程學系 雙主修",
             period: "2020.09 - 2025",
             details: [
-              "GPA: 總平均：3.53 (207學分) 系上排名60%",
+              "GPA: 總平均：3.53 (207學分)",
               "課程表現：人工智慧概論（A+）（排名2/113）、進階物件導向程式設計（A+）、機器學習導論（A）、資料庫系統導論（A）、前端網頁系統開發概論（A+）"
             ],
             transcript: "https://drive.google.com/file/d/1GWsNsBEHQsyV--4gdBoJuB9koXrW8UZZ/view"
