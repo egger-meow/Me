@@ -134,8 +134,8 @@ export const cvData = {
       personality: {
         title: "個人特質",
         content: {
-          intro: "我並不是典型的「愛讀書型」學生，更像是一個對感興趣的事物特別投入的人。雖然未經正式醫院診斷，但依自己與旁人的觀察，推測我可能有 ADHD，這使我在大多數事情上較難保持專注或長期投入（成績也多少反映了這一點）。",
-          passion: "然而，當面對真正感興趣的主題時，我總能全力以赴：從小學時的數學測驗，到大學的 AI 專題與課程，再到 TSMC 暑期實習，我都用成果證明了熱情能轉化為技術與成就。",
+          intro: "在過去的加密貨幣交易經驗中，我曾因缺乏紀律而虧損了很多錢，這段慘痛的經歷讓我深刻體會到穩定與紀律的重要性。",
+          passion: "目前我的目標是成為一名高度自律的穩定交易員。對我而言，攻讀碩士學位與從事工作主要是為了在實現交易目標的過程中維持穩定的現金流。當面對真正感興趣的主題時，我總能全力以赴：從小學時的數學測驗，到大學的 AI 專題與課程，再到 TSMC 暑期實習，我都用成果證明了熱情能轉化為技術與成就。",
           exploration: "我也非常積極探索自己的興趣。從修課選擇上，我從不因課程「涼」來決定是否修課（除非通識或本學期推甄準備），而是積極地全方位探索自己真正想學的內容，並對相中課程全力以赴。熱愛探索、積極學習，是我最真實的寫照。",
           traits: [
             "協作力強：擅長團隊合作（程式上）",
@@ -283,8 +283,8 @@ subProjects: [
       personality: {
         title: "Personal Traits",
         content: {
-          intro: "I'm not a typical 'bookworm' student, but rather someone who becomes deeply invested in things that interest me. Though not formally diagnosed, based on self and others' observations, I may have ADHD, making it difficult to focus or sustain long-term engagement in most things (grades somewhat reflect this).",
-          passion: "However, when facing topics that truly interest me, I always give my all: from elementary school math tests to university AI projects and courses, to TSMC summer internship, I've proven that passion can transform into technical achievement.",
+          intro: "Through my past cryptocurrency trading experience, I've lost a significant amount of money due to lack of discipline, and this painful lesson taught me the profound importance of stability and discipline.",
+          passion: "My current goal is to become a stable crypto trader with high discipline. For me, pursuing a master's degree and having a job are primarily to maintain steady cash flow while working toward my trading goals. When facing topics that truly interest me, I always give my all: from elementary school math tests to university AI projects and courses, to TSMC summer internship, I've proven that passion can transform into technical achievement.",
           exploration: "I actively explore my interests. In course selection, I never choose courses based on being 'easy' (except for general education or application preparation), but actively explore what I truly want to learn comprehensively, giving my all to chosen courses. Love for exploration and active learning is my truest portrayal.",
           traits: [
             "Strong Collaboration: Excel at teamwork (programming)",
