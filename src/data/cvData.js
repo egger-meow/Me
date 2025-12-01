@@ -134,15 +134,15 @@ export const cvData = {
       personality: {
         title: "個人特質",
         content: {
-          intro: "在過去的加密貨幣交易經驗中，我曾因缺乏紀律而虧損了很多錢，這段慘痛的經歷讓我深刻體會到穩定與紀律的重要性。",
-          passion: "目前我的目標是成為一名高度自律的穩定交易員。對我而言，攻讀碩士學位與從事工作主要是為了在實現交易目標的過程中維持穩定的現金流。當面對真正感興趣的主題時，我總能全力以赴：從小學時的數學測驗，到大學的 AI 專題與課程，再到 TSMC 暑期實習，我都用成果證明了熱情能轉化為技術與成就。",
-          exploration: "我也非常積極探索自己的興趣。從修課選擇上，我從不因課程「涼」來決定是否修課（除非通識或本學期推甄準備），而是積極地全方位探索自己真正想學的內容，並對相中課程全力以赴。熱愛探索、積極學習，是我最真實的寫照。",
+          intro: "我對人工智慧與資料科學領域充滿熱忱，尤其在機器學習模型的理論與實務應用上有濃厚興趣。透過產學合作專案與實習經驗，我深刻體會到將學術研究轉化為實際解決方案的價值與挑戰。",
+          passion: "當面對真正感興趣的研究主題時，我總能全力以赴並展現高度自律：從大學 AI 課程獲得全班第二名的成績，到日立永大產學合作中獨立開發異常檢測模型，再到 Accton 實習主導 LLM-SQL 整合專案，我持續用成果證明熱情能轉化為紮實的技術能力與研究成果。我期望透過碩士階段的深入研究，進一步探索 AI/ML 領域的前沿問題。",
+          exploration: "我積極主動地拓展知識邊界。在修課選擇上，我從不以輕鬆為導向，而是積極選修具挑戰性的課程以全方位提升自我。我善於閱讀論文並將新技術快速應用於實際專案，例如在 Accton 實習中主動研究並導入 RSL-SQL 演算法。自主學習、追求卓越，是我最真實的寫照。",
           traits: [
-            "協作力強：擅長團隊合作（程式上）",
-            "技術好奇心：熱衷學習新技術並快速應用",
-            "抗壓性佳：能在高壓情境下保持穩定輸出",
-            "興趣多元：吉他、加密貨幣、運動",
-            "人格特質：MBTI: ISFP-A"
+            "研究潛力：具備獨立思考與問題解決能力，善於將理論應用於實務",
+            "技術好奇心：熱衷學習新技術、閱讀論文並快速應用於專案",
+            "協作力強：擅長跨領域團隊合作與技術溝通",
+            "抗壓性佳：能在高壓情境下保持穩定輸出與高品質成果",
+            "興趣多元：吉他、閱讀、運動"
           ]
         }
       }
@@ -283,15 +283,15 @@ subProjects: [
       personality: {
         title: "Personal Traits",
         content: {
-          intro: "Through my past cryptocurrency trading experience, I've lost a significant amount of money due to lack of discipline, and this painful lesson taught me the profound importance of stability and discipline.",
-          passion: "My current goal is to become a stable crypto trader with high discipline. For me, pursuing a master's degree and having a job are primarily to maintain steady cash flow while working toward my trading goals. When facing topics that truly interest me, I always give my all: from elementary school math tests to university AI projects and courses, to TSMC summer internship, I've proven that passion can transform into technical achievement.",
-          exploration: "I actively explore my interests. In course selection, I never choose courses based on being 'easy' (except for general education or application preparation), but actively explore what I truly want to learn comprehensively, giving my all to chosen courses. Love for exploration and active learning is my truest portrayal.",
+          intro: "I am deeply passionate about AI and data science, with strong interest in both theoretical foundations and practical applications of machine learning. Through industry-academia collaboration projects and internship experiences, I have gained profound appreciation for the value and challenges of translating academic research into real-world solutions.",
+          passion: "When facing research topics that truly interest me, I consistently demonstrate dedication and self-discipline: from achieving 2nd place out of 113 students in Introduction to AI, to independently developing anomaly detection models in the Hitachi Yungtay project, to leading the LLM-SQL integration initiative at Accton, I continuously prove that passion translates into solid technical capabilities and research outcomes. I aspire to deepen my exploration of cutting-edge AI/ML problems through graduate studies.",
+          exploration: "I proactively expand my knowledge boundaries. In course selection, I never choose based on ease, but actively pursue challenging courses for comprehensive self-improvement. I excel at reading research papers and rapidly applying new techniques to real projects—for instance, independently researching and implementing the RSL-SQL algorithm during my Accton internship. Self-directed learning and pursuit of excellence define who I am.",
           traits: [
-            "Strong Collaboration: Excel at teamwork (programming)",
-            "Technical Curiosity: Passionate about learning new technologies and quick application",
-            "Stress Resilience: Maintain stable output under high pressure",
-            "Diverse Interests: Guitar, cryptocurrency, sports",
-            "Personality: MBTI: ISFP-A"
+            "Research Potential: Strong independent thinking and problem-solving skills, adept at bridging theory and practice",
+            "Technical Curiosity: Passionate about learning new technologies, reading papers, and rapid application",
+            "Strong Collaboration: Excel at cross-functional teamwork and technical communication",
+            "Stress Resilience: Maintain stable, high-quality output under pressure",
+            "Diverse Interests: Guitar, reading, sports"
           ]
         }
       }
