@@ -403,7 +403,7 @@ function App() {
                 isDark ? 'text-white' : 'text-gray-800'
               }`}>{data.sections.education.title}</h2>
               {data.sections.education.content.map((edu, index) => (
-                <div key={index}>
+                <div key={index} className="mb-8">
                   <div className="mb-2">
                     <div className="flex justify-between items-start">
                       <div>
@@ -434,6 +434,40 @@ function App() {
                           <ExternalLink size={14} />
                         </a>
                       </li>
+                    )}
+                    {edu.images && edu.images.length > 0 && (
+                      <div className="mt-3">
+                        <button
+                          onClick={() => setSelectedImage({ urls: edu.images, alt: edu.school })}
+                          className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${
+                            isDark
+                              ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 border border-slate-600'
+                              : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                          }`}
+                        >
+                          <Image size={16} />
+                          {language === 'zh' ? '查看證書' : 'View Certificates'}
+                        </button>
+                      </div>
+                    )}
+                    {edu.diplomas && edu.diplomas.length > 0 && (
+                      <div className="mt-3">
+                        <button
+                          onClick={() => setSelectedImage({ 
+                            urls: edu.diplomas.map(d => d.image), 
+                            alt: `${edu.school} ${language === 'zh' ? '畢業證書' : 'Diplomas'}`,
+                            titles: edu.diplomas.map(d => d.type)
+                          })}
+                          className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${
+                            isDark
+                              ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 border border-slate-600'
+                              : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                          }`}
+                        >
+                          <Image size={16} />
+                          {language === 'zh' ? '查看畢業證書' : 'View Diplomas'}
+                        </button>
+                      </div>
                     )}
                   </ul>
                 </div>

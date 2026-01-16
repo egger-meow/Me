@@ -13,14 +13,33 @@ export const cvData = {
         title: "教育背景",
         content: [
           {
-            school: "國立陽明交通大學（NYCU）",
-            degree: "管理科學系、資訊工程學系 雙主修",
-            period: "2020.09 - 2025",
+            school: "國立陽明交通大學（NYCU）碩士",
+            degree: "數據科學與工程研究所 碩士班新生 (已報到)",
+            period: "2026.09 - 2028.06 (預定)",
             details: [
-              "GPA: 總平均：3.53 (207學分)",
+              "錄取 115 學年度 數據科學與工程研究所 碩士班"
+            ],
+            images: ["/Me/imgs/數據所報到證明.jpg"]
+          },
+          {
+            school: "國立陽明交通大學（NYCU）學士",
+            degree: "管理科學系、資訊工程學系 雙主修",
+            period: "2020.09 - 2026.01",
+            details: [
+              "GPA: 總平均：3.54 (210學分)",
               "課程表現：人工智慧概論（A+）（排名2/113）、進階物件導向程式設計（A+）、機器學習導論（A）、資料庫系統導論（A）、前端網頁系統開發概論（A+）"
             ],
-            transcript: "https://drive.google.com/file/d/1GWsNsBEHQsyV--4gdBoJuB9koXrW8UZZ/view"
+            transcript: "https://drive.google.com/file/d/1GWsNsBEHQsyV--4gdBoJuB9koXrW8UZZ/view",
+            diplomas: [
+              {
+                type: "中文畢業證書",
+                image: "/Me/imgs/nycu_Diplonma_ch.jpg"
+              },
+              {
+                type: "英文畢業證書",
+                image: "/Me/imgs/nycu_Diplonma_en.jpg"
+              }
+            ]
           }
         ]
       },
@@ -161,15 +180,34 @@ export const cvData = {
       education: {
         title: "Education",
         content: [
-          {
-            school: "National Yang Ming Chiao Tung University (NYCU)",
-            degree: "Double Major in Management Science & Computer Science",
-            period: "2020.09 - 2025",
+                    {
+            school: "National Yang Ming Chiao Tung University (NYCU), Master",
+            degree: "Institute of Data Science and Engineering (IDSE), incoming Master's Student",
+            period: "2026.09 - 2028.06 (Expected)",
             details: [
-              "GPA: 3.53 (207 credits) Department ranking: ~50%",
+              "Admitted to Master's Program in Data Science and Engineering"
+            ],
+            images: ["/Me/imgs/數據所報到證明.jpg"]
+          },
+          {
+            school: "National Yang Ming Chiao Tung University (NYCU), Bachelor",
+            degree: "Double Major in Management Science & Computer Science",
+            period: "2020.09 - 2026.01",
+            details: [
+              "GPA: 3.54 (210 credits)",
               "Course Performance: Introduction to AI (A+, Rank 2/113), Advanced OOP (A+), Introduction to ML (A), Database Systems (A), Frontend Web Development (A+)"
             ],
-            transcript: "https://drive.google.com/file/d/1XDerdsdUbl4nnVDsqubJbxPvKZfzUoPh/view?usp=sharing"
+            transcript: "https://drive.google.com/file/d/1XDerdsdUbl4nnVDsqubJbxPvKZfzUoPh/view?usp=sharing",
+            diplomas: [
+              {
+                type: "Chinese Diploma",
+                image: "/Me/imgs/nycu_Diplonma_ch.jpg"
+              },
+              {
+                type: "English Diploma",
+                image: "/Me/imgs/nycu_Diplonma_en.jpg"
+              }
+            ]
           }
         ]
       },
