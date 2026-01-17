@@ -57,7 +57,7 @@ export const cvData = {
           {
             company: "Accton Technology Corp.",
             position: "RD-軟體工程實習生",
-            period: "2025.03 - 現在",
+            period: "2025.03 - 2025.10",
             achievements: [
               "主導測試機器 Log Parsing 框架設計，目前仍為生產環境 Dashboard Backend 的核心；另開發 Drain3+RuleParser，已完成並被團隊延伸開發",
               "Log Kafka + TimescaleDB 串聯框架（streaming)：設計並開發完整 pipeline，已成功通過環境測試，為日後大規模時序資料處理奠定基礎",
@@ -225,7 +225,7 @@ export const cvData = {
           {
             company: "Accton Technology Corp.",
             position: "Intern",
-            period: "2025.03 - Present",
+            period: "2025.03 - 2025.10",
 achievements: [
               "Led test machine Log Parsing framework design, still serving as core for production Dashboard Backend; developed Drain3+RuleParser, completed and extended by team",
               "Log Kafka + TimescaleDB streaming framework: Designed and developed complete pipeline, successfully passed environment testing, laying foundation for future large-scale time-series data processing",
