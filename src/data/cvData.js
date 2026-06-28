@@ -3,21 +3,12 @@ export const cvData = {
     name: "侯均頲",
     contact: {
       address: "新竹市東區埔頂三路",
-      email: "inpire.mg09@nycu.edu.tw",
+      email: "jjmow.cs15@nycu.edu.tw",
       phone: "(+886) 977-427-519",
       linkedin: "www.linkedin.com/in/jj-mow-8b903b295",
       github: "https://github.com/egger-meow"
     },
     sections: {
-      status: {
-        title: "近況更新",
-        content: [
-          "🧨 2026/03/11 ~ 2026/06/24 在服台灣義務役 (當兵中)。",
-          "💡 積極尋找 2026 暑期 (7月至8月) 軟體工程、IT 或 AI 相關實習機會！",
-          "📞 面試安排有待討論（因平日身處軍營，可能需安排在假日，或於平常晚上軍營放手機之時段進行遠距面試/通話，也可視情況請假）。",
-          "🙏 懇請能通融與接受，因為我非常渴望能獲得這份實習機會！"
-        ]
-      },
       education: {
         title: "教育背景",
         content: [
@@ -63,6 +54,14 @@ export const cvData = {
       experience: {
         title: "工作經驗",
         content: [
+          {
+            company: "義務役 (Mandatory Military Service)",
+            position: "步槍兵 @ 206旅 (新訓) & 戰車裝填兵 @ 蘭陽指揮部 (下部隊)",
+            period: "2026.03 - 2026.06",
+            achievements: [
+              "✅ 已服役 (Completed)"
+            ]
+          },
           {
             company: "Accton Technology Corp.",
             position: "RD-軟體工程實習生",
@@ -180,21 +179,12 @@ export const cvData = {
     name: "Chun-Ting, Hou",
     contact: {
       address: "Puding 3rd Rd., East Dist., Hsinchu City",
-      email: "inpire.mg09@nycu.edu.tw",
+      email: "jjmow.cs15@nycu.edu.tw",
       phone: "(+886) 977-427-519",
       linkedin: "www.linkedin.com/in/jj-mow-8b903b295",
       github: "https://github.com/egger-meow"
     },
     sections: {
-      status: {
-        title: "Current Status",
-        content: [
-          "🧨 2026/03/11 ~ 2026/06/24: Serving Mandatory Military Service in Taiwan.",
-          "💡 Actively searching for Summer 2026 (July-August) Software Engineering, IT, or AI-related internships!",
-          "📞 Interview availability requires coordination (due to military service, interviews might need to be scheduled on weekends, during weekday evenings when phone usage is allowed, or by taking specific leave).",
-          "🙏 I sincerely hope for your flexibility and understanding, as I am highly enthusiastic about securing an internship opportunity!"
-        ]
-      },
       education: {
         title: "Education",
         content: [
@@ -240,6 +230,14 @@ export const cvData = {
       experience: {
         title: "Work Experience",
         content: [
+          {
+            company: "Mandatory Military Service (Taiwan)",
+            position: "Rifleman @ 206th Brigade (Basic Training) & Tank Loader @ Lanyang Command",
+            period: "2026.03 - 2026.06",
+            achievements: [
+              "✅ Completed Mandatory Military Service"
+            ]
+          },
           {
             company: "Accton Technology Corp.",
             position: "Intern",

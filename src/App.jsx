@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { cvData } from './data/cvData';
 import { Download, Globe, Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Sun, Moon, X, Image } from 'lucide-react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { useReactToPrint } from 'react-to-print';
 import Galaxy from './components/Galaxy';
 import { useScrollAnimation } from './hooks/useScrollAnimation';
 
@@ -144,38 +143,13 @@ function App() {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
 
-  const downloadPDF = async () => {
-    const element = resumeRef.current;
-    const canvas = await html2canvas(element, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: theme === 'dark' ? '#1f2937' : '#ffffff'
-    });
+  const handlePrint = useReactToPrint({
+    content: () => resumeRef.current,
+    documentTitle: `${data.name}_CV`,
+  });
 
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4'
-    });
-
-    const imgWidth = 210;
-    const pageHeight = 295;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
-    let position = 0;
-
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
-
-    pdf.save(`${data.name}_CV.pdf`);
+  const downloadPDF = () => {
+    handlePrint();
   };
 
   const isDark = theme === 'dark';
@@ -200,7 +174,7 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen transition-all duration-500 relative overflow-hidden ${isDark
+    <div className={`h-screen overflow-y-scroll snap-y snap-mandatory scroll-pt-32 transition-all duration-500 relative overflow-x-hidden ${isDark
       ? 'bg-gradient-to-br from-slate-900 via-purple-900/30 to-emerald-900/20'
       : 'bg-gradient-to-br from-gray-50 to-white'
       }`}>
@@ -218,15 +192,15 @@ function App() {
           <Galaxy
             mouseRepulsion={true}
             mouseInteraction={true}
-            density={1.2}
-            glowIntensity={0.4}
-            saturation={0.8}
+            density={0.5}
+            glowIntensity={0.6}
+            saturation={0.5}
             hueShift={240}
             transparent={true}
-            twinkleIntensity={0.4}
-            rotationSpeed={0.05}
-            repulsionStrength={1.5}
-            speed={0.8}
+            twinkleIntensity={0.2}
+            rotationSpeed={0.01}
+            repulsionStrength={1.0}
+            speed={0.4}
           />
         </div>
       )}
@@ -339,7 +313,7 @@ function App() {
           }`}>
           <div className="p-8 md:p-12">
             {/* Header */}
-            <header className="mb-8">
+            <header className="mb-8 snap-start scroll-mt-32">
               <h1 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'
                 }`}>{data.name}</h1>
               <div className={`flex flex-wrap gap-4 text-sm transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-600'
@@ -415,7 +389,7 @@ function App() {
                 sectionRefs.education.current = el;
                 educationRef.current = el;
               }}
-              className={`mb-8 transition-all duration-1000 transform ${educationVisible
+              className={`mb-8 snap-start scroll-mt-32 transition-all duration-1000 transform ${educationVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8'
                 }`}
@@ -496,7 +470,7 @@ function App() {
                 sectionRefs.skills.current = el;
                 skillsRef.current = el;
               }}
-              className={`mb-8 transition-all duration-1000 transform ${skillsVisible
+              className={`mb-8 snap-start scroll-mt-32 transition-all duration-1000 transform ${skillsVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8'
                 }`}
@@ -531,7 +505,7 @@ function App() {
                 sectionRefs.experience.current = el;
                 experienceRef.current = el;
               }}
-              className={`mb-8 transition-all duration-1000 transform ${experienceVisible
+              className={`mb-8 snap-start scroll-mt-32 transition-all duration-1000 transform ${experienceVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8'
                 }`}
@@ -583,7 +557,7 @@ function App() {
                 sectionRefs.projects.current = el;
                 projectsRef.current = el;
               }}
-              className={`mb-8 transition-all duration-1000 transform ${projectsVisible
+              className={`mb-8 snap-start scroll-mt-32 transition-all duration-1000 transform ${projectsVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8'
                 }`}
@@ -720,7 +694,7 @@ function App() {
                 sectionRefs.extracurricular.current = el;
                 extracurricularRef.current = el;
               }}
-              className={`mb-8 transition-all duration-1000 transform ${extracurricularVisible
+              className={`mb-8 snap-start scroll-mt-32 transition-all duration-1000 transform ${extracurricularVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8'
                 }`}
@@ -764,7 +738,7 @@ function App() {
                 sectionRefs.languages.current = el;
                 languagesRef.current = el;
               }}
-              className={`mb-8 transition-all duration-1000 transform ${languagesVisible
+              className={`mb-8 snap-start scroll-mt-32 transition-all duration-1000 transform ${languagesVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8'
                 }`}
@@ -784,7 +758,7 @@ function App() {
                 sectionRefs.personality.current = el;
                 personalityRef.current = el;
               }}
-              className={`mb-8 transition-all duration-1000 transform ${personalityVisible
+              className={`mb-8 snap-start scroll-mt-32 transition-all duration-1000 transform ${personalityVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8'
                 }`}

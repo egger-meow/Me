@@ -7,3 +7,28 @@
   height: 100%;
   position: relative;
 }
+
+@media print {
+  * {
+    color: black !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    border-color: #e5e7eb !important; /* gray-200 */
+  }
+
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 2rem !important;
+  }
+
+  hr {
+    border-top: 1px solid #e5e7eb !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: #2563eb !important; /* blue-600 */
+  }
+}
