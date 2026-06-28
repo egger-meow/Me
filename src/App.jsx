@@ -23,7 +23,7 @@ const ImageModal = ({ isOpen, onClose, imageUrls = [], altText }) => {
   useEffect(() => {
     if (isOpen) setCurrentIndex(0);
   }, [isOpen]);
-  
+
   if (!isOpen || imageUrls.length === 0) return null;
 
   const handlePrevious = (e) => {
@@ -43,8 +43,8 @@ const ImageModal = ({ isOpen, onClose, imageUrls = [], altText }) => {
       aria-modal="true"
       role="dialog"
     >
-      <div 
-        className="relative bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden" 
+      <div
+        className="relative bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
@@ -63,7 +63,7 @@ const ImageModal = ({ isOpen, onClose, imageUrls = [], altText }) => {
             <X size={20} className="text-gray-800" />
           </button>
         </div>
-        
+
         {/* Image Container */}
         <div className="relative w-full h-full flex items-center justify-center p-12">
           <img
@@ -76,7 +76,7 @@ const ImageModal = ({ isOpen, onClose, imageUrls = [], altText }) => {
             }}
           />
         </div>
-        
+
         {/* Navigation Buttons */}
         {imageUrls.length > 1 && (
           <>
@@ -112,10 +112,11 @@ function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const resumeRef = useRef(null);
   const data = cvData[language];
-  
+
 
   // Create refs for each section
   const sectionRefs = {
+    status: useRef(null),
     education: useRef(null),
     skills: useRef(null),
     experience: useRef(null),
@@ -124,8 +125,9 @@ function App() {
     languages: useRef(null),
     personality: useRef(null)
   };
-  
+
   // Scroll animations for sections
+  const [statusRef, statusVisible] = useScrollAnimation({ threshold: 0.2, delay: 50 });
   const [educationRef, educationVisible] = useScrollAnimation({ threshold: 0.2, delay: 100 });
   const [skillsRef, skillsVisible] = useScrollAnimation({ threshold: 0.2, delay: 200 });
   const [experienceRef, experienceVisible] = useScrollAnimation({ threshold: 0.2, delay: 300 });
@@ -149,14 +151,14 @@ function App() {
       useCORS: true,
       backgroundColor: theme === 'dark' ? '#1f2937' : '#ffffff'
     });
-    
+
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
       format: 'a4'
     });
-    
+
     const imgWidth = 210;
     const pageHeight = 295;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -198,23 +200,22 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen transition-all duration-500 relative overflow-hidden ${
-      isDark 
-        ? 'bg-gradient-to-br from-slate-900 via-purple-900/30 to-emerald-900/20' 
-        : 'bg-gradient-to-br from-gray-50 to-white'
-    }`}>
+    <div className={`min-h-screen transition-all duration-500 relative overflow-hidden ${isDark
+      ? 'bg-gradient-to-br from-slate-900 via-purple-900/30 to-emerald-900/20'
+      : 'bg-gradient-to-br from-gray-50 to-white'
+      }`}>
       {/* Galaxy Background */}
       {isDark && (
-        <div style={{ 
-          width: '100%', 
-          height: '100%', 
-          position: 'fixed', 
-          top: 0, 
-          left: 0, 
+        <div style={{
+          width: '100%',
+          height: '100%',
+          position: 'fixed',
+          top: 0,
+          left: 0,
           zIndex: 1,
           minHeight: '100vh'
         }}>
-          <Galaxy 
+          <Galaxy
             mouseRepulsion={true}
             mouseInteraction={true}
             density={1.2}
@@ -230,30 +231,27 @@ function App() {
         </div>
       )}
       {/* Control Bar */}
-      <div className={`fixed top-0 left-0 right-0 shadow-lg z-50 transition-all duration-500 ${
-        isDark 
-          ? 'bg-gradient-to-r from-slate-900/95 via-purple-900/80 to-emerald-900/80 backdrop-blur-md border-b border-purple-800/20' 
-          : 'bg-white/90 backdrop-blur-md border-b border-gray-100'
-      }`}>
+      <div className={`fixed top-0 left-0 right-0 shadow-lg z-50 transition-all duration-500 ${isDark
+        ? 'bg-gradient-to-r from-slate-900/95 via-purple-900/80 to-emerald-900/80 backdrop-blur-md border-b border-purple-800/20'
+        : 'bg-white/90 backdrop-blur-md border-b border-gray-100'
+        }`}>
         <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className={`text-lg font-bold transition-colors duration-300 ${
-            isDark ? 'text-white' : 'text-gray-800'
-          }`}>
+          <h1 className={`text-lg font-bold transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-800'
+            }`}>
             {language === 'zh' ? '個人履歷' : 'Resume'}
           </h1>
           <div className="flex gap-3">
             <button
               onClick={toggleTheme}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 hover:scale-105 transform group relative overflow-hidden ${
-                isDark 
-                  ? 'bg-gradient-to-r from-amber-500/20 to-yellow-500/20 hover:from-amber-400/30 hover:to-yellow-400/30 text-amber-200 hover:text-amber-100 border border-amber-500/20' 
-                  : 'bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white border border-slate-300/20'
-              }`}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 hover:scale-105 transform group relative overflow-hidden ${isDark
+                ? 'bg-gradient-to-r from-amber-500/20 to-yellow-500/20 hover:from-amber-400/30 hover:to-yellow-400/30 text-amber-200 hover:text-amber-100 border border-amber-500/20'
+                : 'bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white border border-slate-300/20'
+                }`}
             >
               <span className="relative z-10 flex items-center gap-2">
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
-                {isDark 
-                  ? (language === 'zh' ? '淺色' : 'Light') 
+                {isDark
+                  ? (language === 'zh' ? '淺色' : 'Light')
                   : (language === 'zh' ? '深色' : 'Dark')
                 }
               </span>
@@ -263,11 +261,10 @@ function App() {
             </button>
             <button
               onClick={toggleLanguage}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 hover:scale-105 transform group relative overflow-hidden ${
-                isDark
-                  ? 'bg-gradient-to-r from-blue-500/20 to-indigo-500/20 hover:from-blue-400/30 hover:to-indigo-400/30 text-blue-200 hover:text-blue-100 border border-blue-500/20'
-                  : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white border border-blue-300/20'
-              }`}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 hover:scale-105 transform group relative overflow-hidden ${isDark
+                ? 'bg-gradient-to-r from-blue-500/20 to-indigo-500/20 hover:from-blue-400/30 hover:to-indigo-400/30 text-blue-200 hover:text-blue-100 border border-blue-500/20'
+                : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white border border-blue-300/20'
+                }`}
             >
               <span className="relative z-10 flex items-center gap-2">
                 <Globe size={18} />
@@ -279,11 +276,10 @@ function App() {
             </button>
             <button
               onClick={downloadPDF}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 hover:scale-105 transform group relative overflow-hidden ${
-                isDark
-                  ? 'bg-gradient-to-r from-emerald-500/20 to-green-500/20 hover:from-emerald-400/30 hover:to-green-400/30 text-emerald-200 hover:text-emerald-100 border border-emerald-500/20'
-                  : 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border border-green-300/20'
-              }`}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 hover:scale-105 transform group relative overflow-hidden ${isDark
+                ? 'bg-gradient-to-r from-emerald-500/20 to-green-500/20 hover:from-emerald-400/30 hover:to-green-400/30 text-emerald-200 hover:text-emerald-100 border border-emerald-500/20'
+                : 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border border-green-300/20'
+                }`}
             >
               <span className="relative z-10 flex items-center gap-2">
                 <Download size={18} />
@@ -295,13 +291,12 @@ function App() {
             </button>
           </div>
         </div>
-        
+
         {/* Navigation Bar */}
-        <div className={`px-4 py-3 border-t transition-all duration-500 ${
-          isDark 
-            ? 'border-purple-800/30 bg-gradient-to-r from-slate-900 via-purple-900/20 to-emerald-900/20 backdrop-blur-sm' 
-            : 'border-gray-100 bg-white/80 backdrop-blur-sm'
-        }`}>
+        <div className={`px-4 py-3 border-t transition-all duration-500 ${isDark
+          ? 'border-purple-800/30 bg-gradient-to-r from-slate-900 via-purple-900/20 to-emerald-900/20 backdrop-blur-sm'
+          : 'border-gray-100 bg-white/80 backdrop-blur-sm'
+          }`}>
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center justify-center">
               <nav className="flex items-center space-x-1">
@@ -309,11 +304,10 @@ function App() {
                   <div key={item.key} className="flex items-center">
                     <button
                       onClick={item.onClick}
-                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 transform group ${
-                        isDark 
-                          ? 'text-emerald-200 hover:text-emerald-100 hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-purple-500/10 rounded-lg' 
-                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-lg'
-                      }`}
+                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 transform group ${isDark
+                        ? 'text-emerald-200 hover:text-emerald-100 hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-purple-500/10 rounded-lg'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-lg'
+                        }`}
                       style={{
                         animationDelay: `${index * 100}ms`
                       }}
@@ -324,11 +318,10 @@ function App() {
                       )}
                     </button>
                     {index < getNavItems().length - 1 && (
-                      <div className={`mx-2 h-4 w-px transition-all duration-300 ${
-                        isDark 
-                          ? 'bg-gradient-to-b from-transparent via-purple-400/40 to-transparent' 
-                          : 'bg-gradient-to-b from-transparent via-gray-300/60 to-transparent'
-                      }`}></div>
+                      <div className={`mx-2 h-4 w-px transition-all duration-300 ${isDark
+                        ? 'bg-gradient-to-b from-transparent via-purple-400/40 to-transparent'
+                        : 'bg-gradient-to-b from-transparent via-gray-300/60 to-transparent'
+                        }`}></div>
                     )}
                   </div>
                 ))}
@@ -340,27 +333,23 @@ function App() {
 
       {/* Resume Content */}
       <div className="pt-32 pb-10 relative z-10">
-        <div ref={resumeRef} className={`max-w-4xl mx-auto shadow-2xl transition-all duration-500 rounded-2xl overflow-hidden ${
-          isDark 
-            ? 'bg-gradient-to-br from-slate-800/95 via-purple-900/40 to-emerald-900/30 backdrop-blur-md border border-purple-800/30' 
-            : 'bg-white/95 backdrop-blur-sm border border-gray-100/50'
-        }`}>
+        <div ref={resumeRef} className={`max-w-4xl mx-auto shadow-2xl transition-all duration-500 rounded-2xl overflow-hidden ${isDark
+          ? 'bg-gradient-to-br from-slate-800/95 via-purple-900/40 to-emerald-900/30 backdrop-blur-md border border-purple-800/30'
+          : 'bg-white/95 backdrop-blur-sm border border-gray-100/50'
+          }`}>
           <div className="p-8 md:p-12">
             {/* Header */}
             <header className="mb-8">
-              <h1 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>{data.name}</h1>
-              <div className={`flex flex-wrap gap-4 text-sm transition-colors duration-300 ${
-                isDark ? 'text-gray-300' : 'text-gray-600'
-              }`}>
+              <h1 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'
+                }`}>{data.name}</h1>
+              <div className={`flex flex-wrap gap-4 text-sm transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-600'
+                }`}>
                 <span className="flex items-center gap-1">
                   <MapPin size={16} />
                   {data.contact.address}
                 </span>
-                <a href={`mailto:${data.contact.email}`} className={`flex items-center gap-1 transition-colors ${
-                  isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'
-                }`}>
+                <a href={`mailto:${data.contact.email}`} className={`flex items-center gap-1 transition-colors ${isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'
+                  }`}>
                   <Mail size={16} />
                   {data.contact.email}
                 </a>
@@ -368,68 +357,94 @@ function App() {
                   <Phone size={16} />
                   {data.contact.phone}
                 </span>
-                <a href={`https://${data.contact.linkedin}`} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-1 transition-colors ${
-                  isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'
-                }`}>
+                <a href={`https://${data.contact.linkedin}`} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-1 transition-colors ${isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'
+                  }`}>
                   <Linkedin size={16} />
                   LinkedIn
                 </a>
-                <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-1 transition-colors ${
-                  isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'
-                }`}>
+                <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-1 transition-colors ${isDark ? 'hover:text-blue-400' : 'hover:text-blue-600'
+                  }`}>
                   <Github size={16} />
                   GitHub
                 </a>
               </div>
             </header>
 
-            <hr className={`border-t-2 mb-8 transition-colors duration-300 ${
-              isDark ? 'border-gray-600' : 'border-gray-300'
-            }`} />
+            <hr className={`border-t-2 mb-8 transition-colors duration-300 ${isDark ? 'border-gray-600' : 'border-gray-300'
+              }`} />
+
+            {/* Status */}
+            {data.sections.status && (
+              <>
+                <section
+                  ref={(el) => {
+                    sectionRefs.status.current = el;
+                    statusRef.current = el;
+                  }}
+                  className={`mb-8 transition-all duration-1000 transform ${statusVisible
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-8'
+                    }`}
+                >
+                  <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-amber-400' : 'text-amber-600'
+                    }`}>{data.sections.status.title}</h2>
+                  <div className={`p-5 rounded-xl border-l-4 transition-all duration-300 ${isDark
+                    ? 'bg-amber-900/20 border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.1)]'
+                    : 'bg-amber-50 border-amber-500 shadow-sm'
+                    }`}>
+                    <ul className={`space-y-3 transition-colors duration-300 ${isDark ? 'text-gray-200' : 'text-gray-800'
+                      }`}>
+                      {data.sections.status.content.map((item, idx) => (
+                        <li key={idx} className="leading-relaxed flex items-start">
+                          <span className="mr-2 mt-0.5">{Array.from(item)[0]}</span>
+                          <span>{Array.from(item).slice(1).join('').trim()}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
+
+                <hr className={`border-t mb-8 transition-colors duration-300 ${isDark ? 'border-gray-600' : 'border-gray-200'
+                  }`} />
+              </>
+            )}
 
             {/* Education */}
-            <section 
+            <section
               ref={(el) => {
                 sectionRefs.education.current = el;
                 educationRef.current = el;
-              }} 
-              className={`mb-8 transition-all duration-1000 transform ${
-                educationVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
+              }}
+              className={`mb-8 transition-all duration-1000 transform ${educationVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+                }`}
             >
-              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
-                isDark ? 'text-white' : 'text-gray-800'
-              }`}>{data.sections.education.title}</h2>
+              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-800'
+                }`}>{data.sections.education.title}</h2>
               {data.sections.education.content.map((edu, index) => (
                 <div key={index} className="mb-8">
                   <div className="mb-2">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className={`text-lg font-semibold transition-colors duration-300 ${
-                          isDark ? 'text-white' : 'text-gray-900'
-                        }`}>{edu.school}</h3>
-                        <p className={`transition-colors duration-300 ${
-                          isDark ? 'text-gray-300' : 'text-gray-700'
-                        }`}>{edu.degree}</p>
+                        <h3 className={`text-lg font-semibold transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'
+                          }`}>{edu.school}</h3>
+                        <p className={`transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                          }`}>{edu.degree}</p>
                       </div>
-                      <span className={`transition-colors duration-300 ${
-                        isDark ? 'text-gray-400' : 'text-gray-600'
-                      }`}>{edu.period}</span>
+                      <span className={`transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-600'
+                        }`}>{edu.period}</span>
                     </div>
                   </div>
-                  <ul className={`list-disc list-inside ml-4 space-y-1 transition-colors duration-300 ${
-                    isDark ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
+                  <ul className={`list-disc list-inside ml-4 space-y-1 transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
                     {edu.details.map((detail, idx) => (
                       <li key={idx}>{detail}</li>
                     ))}
                     {edu.transcript && (
                       <li>
-                        <a href={edu.transcript} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 hover:underline transition-colors ${
-                          isDark ? 'text-blue-400' : 'text-blue-600'
-                        }`}>
+                        <a href={edu.transcript} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 hover:underline transition-colors ${isDark ? 'text-blue-400' : 'text-blue-600'
+                          }`}>
                           {language === 'zh' ? '歷年成績單' : 'Transcript'}
                           <ExternalLink size={14} />
                         </a>
@@ -439,11 +454,10 @@ function App() {
                       <div className="mt-3">
                         <button
                           onClick={() => setSelectedImage({ urls: edu.images, alt: edu.school })}
-                          className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${
-                            isDark
-                              ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 border border-slate-600'
-                              : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
-                          }`}
+                          className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${isDark
+                            ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 border border-slate-600'
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                            }`}
                         >
                           <Image size={16} />
                           {language === 'zh' ? '查看證書' : 'View Certificates'}
@@ -453,16 +467,15 @@ function App() {
                     {edu.diplomas && edu.diplomas.length > 0 && (
                       <div className="mt-3">
                         <button
-                          onClick={() => setSelectedImage({ 
-                            urls: edu.diplomas.map(d => d.image), 
+                          onClick={() => setSelectedImage({
+                            urls: edu.diplomas.map(d => d.image),
                             alt: `${edu.school} ${language === 'zh' ? '畢業證書' : 'Diplomas'}`,
                             titles: edu.diplomas.map(d => d.type)
                           })}
-                          className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${
-                            isDark
-                              ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 border border-slate-600'
-                              : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
-                          }`}
+                          className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${isDark
+                            ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 border border-slate-600'
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                            }`}
                         >
                           <Image size={16} />
                           {language === 'zh' ? '查看畢業證書' : 'View Diplomas'}
@@ -474,84 +487,71 @@ function App() {
               ))}
             </section>
 
-            <hr className={`border-t mb-8 transition-colors duration-300 ${
-              isDark ? 'border-gray-600' : 'border-gray-200'
-            }`} />
+            <hr className={`border-t mb-8 transition-colors duration-300 ${isDark ? 'border-gray-600' : 'border-gray-200'
+              }`} />
 
             {/* Skills */}
-            <section 
+            <section
               ref={(el) => {
                 sectionRefs.skills.current = el;
                 skillsRef.current = el;
-              }} 
-              className={`mb-8 transition-all duration-1000 transform ${
-                skillsVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
+              }}
+              className={`mb-8 transition-all duration-1000 transform ${skillsVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+                }`}
             >
-              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
-                isDark ? 'text-white' : 'text-gray-800'
-              }`}>{data.sections.skills.title}</h2>
+              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-800'
+                }`}>{data.sections.skills.title}</h2>
               <div className="space-y-2">
-                <p className={`transition-colors duration-300 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
+                <p className={`transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
                   <span className="font-semibold">{language === 'zh' ? '程式語言：' : 'Programming Languages: '}</span>
                   {data.sections.skills.content.languages}
                 </p>
-                <p className={`transition-colors duration-300 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
+                <p className={`transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
                   <span className="font-semibold">{language === 'zh' ? '工具與技術：' : 'Tools & Technologies: '}</span>
                   {data.sections.skills.content.tools}
                 </p>
-                <p className={`transition-colors duration-300 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
+                <p className={`transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
                   <span className="font-semibold">{language === 'zh' ? '技術專長：' : 'Technical Expertise: '}</span>
                   {data.sections.skills.content.expertise}
                 </p>
               </div>
             </section>
 
-            <hr className={`border-t mb-8 transition-colors duration-300 ${
-              isDark ? 'border-gray-600' : 'border-gray-200'
-            }`} />
+            <hr className={`border-t mb-8 transition-colors duration-300 ${isDark ? 'border-gray-600' : 'border-gray-200'
+              }`} />
 
             {/* Experience */}
-            <section 
+            <section
               ref={(el) => {
                 sectionRefs.experience.current = el;
                 experienceRef.current = el;
-              }} 
-              className={`mb-8 transition-all duration-1000 transform ${
-                experienceVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
+              }}
+              className={`mb-8 transition-all duration-1000 transform ${experienceVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+                }`}
             >
-              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
-                isDark ? 'text-white' : 'text-gray-800'
-              }`}>{data.sections.experience.title}</h2>
+              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-800'
+                }`}>{data.sections.experience.title}</h2>
               {data.sections.experience.content.map((exp, index) => (
                 <div key={index} className="mb-6">
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <h3 className={`text-lg font-semibold transition-colors duration-300 ${
-                        isDark ? 'text-white' : 'text-gray-900'
-                      }`}>{exp.company}</h3>
-                      <p className={`transition-colors duration-300 ${
-                        isDark ? 'text-gray-300' : 'text-gray-700'
-                      }`}>{exp.position}</p>
+                      <h3 className={`text-lg font-semibold transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'
+                        }`}>{exp.company}</h3>
+                      <p className={`transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                        }`}>{exp.position}</p>
                     </div>
-                    <span className={`transition-colors duration-300 ${
-                      isDark ? 'text-gray-400' : 'text-gray-600'
-                    }`}>{exp.period}</span>
+                    <span className={`transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-600'
+                      }`}>{exp.period}</span>
                   </div>
-                  <ul className={`list-disc list-inside ml-4 space-y-1 transition-colors duration-300 ${
-                    isDark ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
+                  <ul className={`list-disc list-inside ml-4 space-y-1 transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
                     {exp.achievements.map((achievement, idx) => (
                       <li key={idx}>{achievement}</li>
                     ))}
@@ -560,11 +560,10 @@ function App() {
                     <div className="mt-3">
                       <button
                         onClick={() => setSelectedImage({ urls: exp.images, alt: exp.company })}
-                        className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${
-                          isDark
-                            ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 border border-slate-600'
-                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
-                        }`}
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${isDark
+                          ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 border border-slate-600'
+                          : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                          }`}
                       >
                         <Image size={16} />
                         {language === 'zh' ? '查看相關證書' : 'View Certificates'}
@@ -575,47 +574,40 @@ function App() {
               ))}
             </section>
 
-            <hr className={`border-t mb-8 transition-colors duration-300 ${
-              isDark ? 'border-gray-600' : 'border-gray-200'
-            }`} />
+            <hr className={`border-t mb-8 transition-colors duration-300 ${isDark ? 'border-gray-600' : 'border-gray-200'
+              }`} />
 
             {/* Projects */}
-            <section 
+            <section
               ref={(el) => {
                 sectionRefs.projects.current = el;
                 projectsRef.current = el;
-              }} 
-              className={`mb-8 transition-all duration-1000 transform ${
-                projectsVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
+              }}
+              className={`mb-8 transition-all duration-1000 transform ${projectsVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+                }`}
             >
-              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
-                isDark ? 'text-white' : 'text-gray-800'
-              }`}>{data.sections.projects.title}</h2>
+              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-800'
+                }`}>{data.sections.projects.title}</h2>
               {data.sections.projects.content.map((project, index) => (
                 <div key={index} className="mb-6">
-                  <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
-                    isDark ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'
+                    }`}>
                     {project.name}
-                    {project.advisor && <span className={`text-sm ml-2 transition-colors duration-300 ${
-                      isDark ? 'text-gray-400' : 'text-gray-600'
-                    }`}>({project.advisor})</span>}
+                    {project.advisor && <span className={`text-sm ml-2 transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-600'
+                      }`}>({project.advisor})</span>}
                   </h3>
                   {project.description && (
-                    <ul className={`list-disc list-inside ml-4 space-y-1 transition-colors duration-300 ${
-                      isDark ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
+                    <ul className={`list-disc list-inside ml-4 space-y-1 transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                      }`}>
                       {project.description.map((desc, idx) => (
                         <li key={idx}>{desc}</li>
                       ))}
                       {project.link && (
                         <li>
-                          <a href={project.link} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 hover:underline transition-colors ${
-                            isDark ? 'text-blue-400' : 'text-blue-600'
-                          }`}>
+                          <a href={project.link} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 hover:underline transition-colors ${isDark ? 'text-blue-400' : 'text-blue-600'
+                            }`}>
                             {language === 'zh' ? '專題細節與程式碼' : 'Project Details & Code'}
                             <ExternalLink size={14} />
                           </a>
@@ -627,35 +619,31 @@ function App() {
                     <div className="mt-6">
                       <div className="grid gap-4 md:gap-6">
                         {project.subProjects.map((subProject, subIdx) => (
-                          <div key={subIdx} className={`relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.02] transform ${
-                            isDark 
-                              ? 'bg-gradient-to-br from-slate-800/50 via-purple-900/20 to-emerald-900/10 border border-purple-800/20 hover:border-emerald-500/30' 
-                              : 'bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/50 hover:border-gray-300 shadow-sm hover:shadow-md'
-                          }`}>
+                          <div key={subIdx} className={`relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.02] transform ${isDark
+                            ? 'bg-gradient-to-br from-slate-800/50 via-purple-900/20 to-emerald-900/10 border border-purple-800/20 hover:border-emerald-500/30'
+                            : 'bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/50 hover:border-gray-300 shadow-sm hover:shadow-md'
+                            }`}>
                             <div className="p-6">
                               <div className="flex flex-col lg:flex-row gap-4">
                                 <div className="flex-1">
-                                  <h5 className={`text-lg font-semibold mb-3 transition-colors duration-300 ${
-                                    isDark ? 'text-emerald-200' : 'text-gray-900'
-                                  }`}>
+                                  <h5 className={`text-lg font-semibold mb-3 transition-colors duration-300 ${isDark ? 'text-emerald-200' : 'text-gray-900'
+                                    }`}>
                                     {subProject.name}
                                   </h5>
-                                  <p className={`leading-relaxed transition-colors duration-300 ${
-                                    isDark ? 'text-gray-300' : 'text-gray-700'
-                                  }`}>
+                                  <p className={`leading-relaxed transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                                    }`}>
                                     {subProject.description}
                                   </p>
                                   {subProject.github && (
                                     <div className="mt-3">
-                                      <a 
-                                        href={subProject.github} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 transform ${
-                                          isDark 
-                                            ? 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 hover:text-emerald-200 border border-emerald-500/20' 
-                                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 border border-gray-200'
-                                        }`}
+                                      <a
+                                        href={subProject.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 transform ${isDark
+                                          ? 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 hover:text-emerald-200 border border-emerald-500/20'
+                                          : 'bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 border border-gray-200'
+                                          }`}
                                       >
                                         <Github size={16} />
                                         {language === 'zh' ? '查看源碼' : 'View Code'}
@@ -684,33 +672,29 @@ function App() {
                         ))}
                       </div>
                       {project.note && (
-                        <div className={`mt-6 p-4 rounded-xl transition-all duration-300 ${
-                          isDark 
-                            ? 'bg-gradient-to-r from-emerald-900/20 via-purple-900/10 to-emerald-900/20 border border-emerald-500/20' 
-                            : 'bg-gradient-to-r from-blue-50 via-indigo-50/50 to-blue-50 border border-blue-200/50'
-                        }`}>
+                        <div className={`mt-6 p-4 rounded-xl transition-all duration-300 ${isDark
+                          ? 'bg-gradient-to-r from-emerald-900/20 via-purple-900/10 to-emerald-900/20 border border-emerald-500/20'
+                          : 'bg-gradient-to-r from-blue-50 via-indigo-50/50 to-blue-50 border border-blue-200/50'
+                          }`}>
                           <div className="flex items-start gap-3">
-                            <div className={`mt-0.5 transition-colors duration-300 ${
-                              isDark ? 'text-emerald-400' : 'text-blue-500'
-                            }`}>
+                            <div className={`mt-0.5 transition-colors duration-300 ${isDark ? 'text-emerald-400' : 'text-blue-500'
+                              }`}>
                               <Github size={18} />
                             </div>
                             <div className="flex-1">
-                              <p className={`text-sm font-medium transition-colors duration-300 ${
-                                isDark ? 'text-emerald-200' : 'text-gray-800'
-                              }`}>
+                              <p className={`text-sm font-medium transition-colors duration-300 ${isDark ? 'text-emerald-200' : 'text-gray-800'
+                                }`}>
                                 {project.note}
                               </p>
                               {project.github && (
-                                <a 
-                                  href={project.github} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer" 
-                                  className={`inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 transform ${
-                                    isDark 
-                                      ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 hover:text-emerald-100 border border-emerald-500/30' 
-                                      : 'bg-blue-100 hover:bg-blue-200 text-blue-700 hover:text-blue-800 border border-blue-200'
-                                  }`}
+                                <a
+                                  href={project.github}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={`inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 transform ${isDark
+                                    ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 hover:text-emerald-100 border border-emerald-500/30'
+                                    : 'bg-blue-100 hover:bg-blue-200 text-blue-700 hover:text-blue-800 border border-blue-200'
+                                    }`}
                                 >
                                   <Github size={16} />
                                   {language === 'zh' ? '瀏覽完整 GitHub' : 'Browse Full GitHub'}
@@ -727,42 +711,35 @@ function App() {
               ))}
             </section>
 
-            <hr className={`border-t mb-8 transition-colors duration-300 ${
-              isDark ? 'border-gray-600' : 'border-gray-200'
-            }`} />
+            <hr className={`border-t mb-8 transition-colors duration-300 ${isDark ? 'border-gray-600' : 'border-gray-200'
+              }`} />
 
             {/* Extracurricular */}
-            <section 
+            <section
               ref={(el) => {
                 sectionRefs.extracurricular.current = el;
                 extracurricularRef.current = el;
-              }} 
-              className={`mb-8 transition-all duration-1000 transform ${
-                extracurricularVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
+              }}
+              className={`mb-8 transition-all duration-1000 transform ${extracurricularVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+                }`}
             >
-              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
-                isDark ? 'text-white' : 'text-gray-800'
-              }`}>{data.sections.extracurricular.title}</h2>
+              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-800'
+                }`}>{data.sections.extracurricular.title}</h2>
               {data.sections.extracurricular.content.map((activity, index) => (
                 <div key={index} className="mb-4">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className={`text-lg font-semibold transition-colors duration-300 ${
-                        isDark ? 'text-white' : 'text-gray-900'
-                      }`}>{activity.organization}</h3>
-                      <p className={`transition-colors duration-300 ${
-                        isDark ? 'text-gray-300' : 'text-gray-700'
-                      }`}>{activity.role}</p>
-                      <p className={`transition-colors duration-300 ${
-                        isDark ? 'text-gray-300' : 'text-gray-600'
-                      }`}>{activity.description}</p>
+                      <h3 className={`text-lg font-semibold transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'
+                        }`}>{activity.organization}</h3>
+                      <p className={`transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                        }`}>{activity.role}</p>
+                      <p className={`transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-600'
+                        }`}>{activity.description}</p>
                     </div>
-                    <span className={`transition-colors duration-300 ${
-                      isDark ? 'text-gray-400' : 'text-gray-600'
-                    }`}>{activity.period}</span>
+                    <span className={`transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-600'
+                      }`}>{activity.period}</span>
                   </div>
                   {activity.image && (
                     <div className="mt-3">
@@ -778,52 +755,44 @@ function App() {
               ))}
             </section>
 
-            <hr className={`border-t mb-8 transition-colors duration-300 ${
-              isDark ? 'border-gray-600' : 'border-gray-200'
-            }`} />
+            <hr className={`border-t mb-8 transition-colors duration-300 ${isDark ? 'border-gray-600' : 'border-gray-200'
+              }`} />
 
             {/* Languages */}
-            <section 
+            <section
               ref={(el) => {
                 sectionRefs.languages.current = el;
                 languagesRef.current = el;
-              }} 
-              className={`mb-8 transition-all duration-1000 transform ${
-                languagesVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
+              }}
+              className={`mb-8 transition-all duration-1000 transform ${languagesVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+                }`}
             >
-              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
-                isDark ? 'text-white' : 'text-gray-800'
-              }`}>{data.sections.languages.title}</h2>
-              <p className={`transition-colors duration-300 ${
-                isDark ? 'text-gray-300' : 'text-gray-700'
-              }`}>{data.sections.languages.content}</p>
+              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-800'
+                }`}>{data.sections.languages.title}</h2>
+              <p className={`transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                }`}>{data.sections.languages.content}</p>
             </section>
 
-            <hr className={`border-t mb-8 transition-colors duration-300 ${
-              isDark ? 'border-gray-600' : 'border-gray-200'
-            }`} />
+            <hr className={`border-t mb-8 transition-colors duration-300 ${isDark ? 'border-gray-600' : 'border-gray-200'
+              }`} />
 
             {/* Personality */}
-            <section 
+            <section
               ref={(el) => {
                 sectionRefs.personality.current = el;
                 personalityRef.current = el;
-              }} 
-              className={`mb-8 transition-all duration-1000 transform ${
-                personalityVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
+              }}
+              className={`mb-8 transition-all duration-1000 transform ${personalityVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+                }`}
             >
-              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
-                isDark ? 'text-white' : 'text-gray-800'
-              }`}>{data.sections.personality.title}</h2>
-              <div className={`space-y-3 transition-colors duration-300 ${
-                isDark ? 'text-gray-300' : 'text-gray-700'
-              }`}>
+              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-800'
+                }`}>{data.sections.personality.title}</h2>
+              <div className={`space-y-3 transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'
+                }`}>
                 <p>{data.sections.personality.content.intro}</p>
                 <p>{data.sections.personality.content.passion}</p>
                 <p>{data.sections.personality.content.exploration}</p>

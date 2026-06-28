@@ -9,11 +9,20 @@ export const cvData = {
       github: "https://github.com/egger-meow"
     },
     sections: {
+      status: {
+        title: "近況更新",
+        content: [
+          "🧨 2026/03/11 ~ 2026/06/24 在服台灣義務役 (當兵中)。",
+          "💡 積極尋找 2026 暑期 (7月至8月) 軟體工程、IT 或 AI 相關實習機會！",
+          "📞 面試安排有待討論（因平日身處軍營，可能需安排在假日，或於平常晚上軍營放手機之時段進行遠距面試/通話，也可視情況請假）。",
+          "🙏 懇請能通融與接受，因為我非常渴望能獲得這份實習機會！"
+        ]
+      },
       education: {
         title: "教育背景",
         content: [
           {
-            school: "國立陽明交通大學（NYCU）碩士",
+            school: "國立陽明交通大學（NYCU）碩士（錄取資格）",
             degree: "數據科學與工程研究所 碩士班新生 (已報到)",
             period: "2026.09 - 2028.06 (預定)",
             details: [
@@ -66,7 +75,7 @@ export const cvData = {
               "經常負責協助 程式碼重構與最佳化，憑藉清晰的架構設計直覺與 AI 工具整合能力，顯著提升專案品質",
               "擔任團隊 Git 專家，協助版本控管流程設計與問題解決"
             ],
-            images: ["/Me/imgs/accton_page-0001.jpg","/Me/imgs/accton.jpg"]
+            images: ["/Me/imgs/accton_page-0001.jpg", "/Me/imgs/accton.jpg"]
           },
           {
             company: "台灣積體電路製造股份有限公司 (TSMC)",
@@ -177,11 +186,20 @@ export const cvData = {
       github: "https://github.com/egger-meow"
     },
     sections: {
+      status: {
+        title: "Current Status",
+        content: [
+          "🧨 2026/03/11 ~ 2026/06/24: Serving Mandatory Military Service in Taiwan.",
+          "💡 Actively searching for Summer 2026 (July-August) Software Engineering, IT, or AI-related internships!",
+          "📞 Interview availability requires coordination (due to military service, interviews might need to be scheduled on weekends, during weekday evenings when phone usage is allowed, or by taking specific leave).",
+          "🙏 I sincerely hope for your flexibility and understanding, as I am highly enthusiastic about securing an internship opportunity!"
+        ]
+      },
       education: {
         title: "Education",
         content: [
-                    {
-            school: "National Yang Ming Chiao Tung University (NYCU), Master",
+          {
+            school: "National Yang Ming Chiao Tung University (NYCU), Master (Accepted)",
             degree: "Institute of Data Science and Engineering (IDSE), incoming Master's Student",
             period: "2026.09 - 2028.06 (Expected)",
             details: [
@@ -226,7 +244,7 @@ export const cvData = {
             company: "Accton Technology Corp.",
             position: "Intern",
             period: "2025.03 - 2025.10",
-achievements: [
+            achievements: [
               "Led test machine Log Parsing framework design, still serving as core for production Dashboard Backend; developed Drain3+RuleParser, completed and extended by team",
               "Log Kafka + TimescaleDB streaming framework: Designed and developed complete pipeline, successfully passed environment testing, laying foundation for future large-scale time-series data processing",
               "LLM-SQL Integration: Adopted lightweight VANNA framework combined with advanced RSL-SQL algorithm (excellent performance in BIRD benchmark)",
@@ -240,7 +258,7 @@ achievements: [
             company: "Taiwan Semiconductor Manufacturing Company (TSMC)",
             position: "Software Engineering Intern",
             period: "2024.07 - 2024.08",
-achievements: [
+            achievements: [
               "Served as full-stack developer in IT Department (BSID), participated in global employee leave management system development, optimizing user experience and system performance",
               "Fine-tuned system details and differentiated features for two regional employee needs, ensuring cross-regional user accuracy and consistent experience",
               "Technologies: TypeScript (React), Java, Azure DevOps, CI/CD",
@@ -265,7 +283,7 @@ achievements: [
           },
           {
             name: "Course Side Projects",
-subProjects: [
+            subProjects: [
               {
                 name: "Virtual Food Ordering Service Backend System",
                 description: "Built complete backend service using MySQL, JavaScript, jQuery, PHP, and XAMPP (Database System course project)",
