@@ -1,6 +1,8 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Download } from 'lucide-react';
 import PhotoSlot from '../shared/PhotoSlot';
+import Magnetic from '../shared/Magnetic';
+import CountUp from '../shared/CountUp';
 
 const container = {
   hidden: {},
@@ -16,11 +18,18 @@ const Hero = ({ data, isDark, onDownloadPDF }) => {
   const reduceMotion = useReducedMotion();
   const { hero, contact, name } = data;
 
+  // Apple-style hero recede: as the reader scrolls into the page, the hero
+  // gently scales down and dims behind the incoming content.
+  const { scrollY } = useScroll();
+  const recedeScale = useTransform(scrollY, [0, 560], [1, 0.95]);
+  const recedeOpacity = useTransform(scrollY, [0, 560], [1, 0.4]);
+
   return (
     <motion.header
       variants={container}
       initial={reduceMotion ? false : 'hidden'}
       animate="show"
+      style={reduceMotion ? undefined : { scale: recedeScale, opacity: recedeOpacity, transformOrigin: 'top center' }}
       className="mb-10"
     >
       <div className="flex flex-col-reverse md:flex-row md:items-center gap-8 md:gap-12">
@@ -103,21 +112,23 @@ const Hero = ({ data, isDark, onDownloadPDF }) => {
 
           {/* CTAs */}
           <motion.div variants={item} className="flex flex-wrap gap-3">
-            <motion.a
-              whileHover={{ scale: 1.04, y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              href={contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-colors cursor-pointer ${
-                isDark
-                  ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white shadow-glow-emerald'
-                  : 'bg-gray-900 hover:bg-gray-800 text-white'
-              }`}
-            >
-              <Github size={16} />
-              {hero.ctas.github}
-            </motion.a>
+            <Magnetic>
+              <motion.a
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                href={contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-colors cursor-pointer ${
+                  isDark
+                    ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white shadow-glow-emerald'
+                    : 'bg-gray-900 hover:bg-gray-800 text-white'
+                }`}
+              >
+                <Github size={16} />
+                {hero.ctas.github}
+              </motion.a>
+            </Magnetic>
             <motion.a
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.97 }}
@@ -184,10 +195,10 @@ const Hero = ({ data, isDark, onDownloadPDF }) => {
                 : 'bg-white border-gray-200 hover:border-emerald-400/60 shadow-sm'
             }`}
           >
-            <div className={`font-display text-2xl font-bold ${
+            <div className={`font-display text-2xl font-bold tabular-nums ${
               isDark ? 'text-emerald-300' : 'text-emerald-600'
             }`}>
-              {stat.value}
+              <CountUp value={stat.value} />
             </div>
             <div className={`text-xs mt-0.5 leading-snug ${
               isDark ? 'text-slate-400' : 'text-gray-500'

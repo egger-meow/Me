@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
 import SectionHeading from '../shared/SectionHeading';
 import PhotoSlot from '../shared/PhotoSlot';
+import TiltCard from '../shared/TiltCard';
+import Parallax from '../shared/Parallax';
 
 const StackChip = ({ label, isDark }) => (
   <span
@@ -59,10 +61,11 @@ const SystemsShowcase = ({ section, isDark, index }) => (
     {/* Featured systems */}
     <div className="space-y-8">
       {section.featured.map((system, idx) => (
-        <motion.article
+        <TiltCard
           key={system.id}
-          whileHover={{ y: -6 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+          as="article"
+          maxTilt={4}
+          spotlightColor={isDark ? 'rgba(16, 185, 129, 0.12)' : 'rgba(16, 185, 129, 0.07)'}
           className={`relative overflow-hidden rounded-2xl border transition-colors duration-300 ${
             isDark
               ? 'bg-gradient-to-br from-slate-800/60 via-purple-900/20 to-emerald-900/10 border-purple-800/25 hover:border-emerald-500/40 hover:shadow-glow-emerald'
@@ -73,7 +76,9 @@ const SystemsShowcase = ({ section, isDark, index }) => (
             <div className={`grid gap-6 lg:grid-cols-5 lg:items-start`}>
               {/* Screenshot */}
               <div className={`lg:col-span-2 ${idx % 2 === 1 ? 'lg:order-last' : ''}`}>
-                <ScreenshotFrame system={system} isDark={isDark} />
+                <Parallax range={12}>
+                  <ScreenshotFrame system={system} isDark={isDark} />
+                </Parallax>
               </div>
 
               {/* Content */}
@@ -145,7 +150,7 @@ const SystemsShowcase = ({ section, isDark, index }) => (
               </div>
             </div>
           </div>
-        </motion.article>
+        </TiltCard>
       ))}
     </div>
 
@@ -159,14 +164,16 @@ const SystemsShowcase = ({ section, isDark, index }) => (
     </h4>
     <div className="grid sm:grid-cols-2 gap-4">
       {section.explorations.map((project) => (
-        <motion.a
+        <TiltCard
           key={project.name}
+          as="a"
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ y: -4 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-          className={`block rounded-xl border p-5 transition-colors duration-300 cursor-pointer ${
+          maxTilt={6}
+          lift={-4}
+          spotlightColor={isDark ? 'rgba(168, 85, 247, 0.12)' : 'rgba(168, 85, 247, 0.07)'}
+          className={`relative overflow-hidden block rounded-xl border p-5 transition-colors duration-300 cursor-pointer ${
             isDark
               ? 'bg-slate-800/50 border-purple-800/25 hover:border-purple-500/40 hover:shadow-glow-purple'
               : 'bg-white border-gray-200 hover:border-purple-400/50 shadow-sm hover:shadow-md'
@@ -186,7 +193,7 @@ const SystemsShowcase = ({ section, isDark, index }) => (
               <StackChip key={tech} label={tech} isDark={isDark} />
             ))}
           </div>
-        </motion.a>
+        </TiltCard>
       ))}
     </div>
   </>

@@ -66,8 +66,8 @@ export const cvData = {
             github: "https://github.com/egger-meow/maybech"
           },
           {
-            id: "bnb8688",
-            name: "86.88 民宿官網",
+            id: "bnb-website",
+            name: "民宿品牌官網",
             tag: "真實客戶產品",
             period: "2026",
             description: "透過主動開發客源接下的真實民宿委託案：以 Next.js 打造訂房導向的品牌官網，從業主痛點出發設計照片展示、房型資訊與訂房動線。",
@@ -77,7 +77,7 @@ export const cvData = {
               "訂房轉換導向的 UI/UX：房型展示、照片敘事、行動呼籲動線"
             ],
             stack: ["Next.js", "TypeScript", "React", "TailwindCSS"],
-            screenshot: "/Me/imgs/projects/8688.png",
+            screenshot: "/Me/imgs/projects/bnb.png",
             screenshotLabel: "網站截圖",
             github: "https://github.com/egger-meow/eight-six-eight-eight"
           },
@@ -337,7 +337,7 @@ export const cvData = {
         content: {
           intro: "我對人工智慧與資料科學領域充滿熱忱，尤其在機器學習模型的理論與實務應用上有濃厚興趣。透過產學合作專案與實習經驗，我深刻體會到將學術研究轉化為實際解決方案的價值與挑戰。",
           passion: "當面對真正感興趣的研究主題時，我總能全力以赴並展現高度自律：從大學 AI 課程獲得全班第二名的成績，到日立永大產學合作中獨立開發異常檢測模型，再到 Accton 實習主導 LLM-SQL 整合專案，我持續用成果證明熱情能轉化為紮實的技術能力與研究成果。我期望透過碩士階段的深入研究，進一步探索 AI/ML 領域的前沿問題。",
-          exploration: "我積極主動地拓展知識邊界，也不只解被指派的題目：86.88 民宿案是我主動找到的真實客戶需求，Maybech 是我對市場結構、風險與執行紀律的長期研究實作。我善於閱讀論文並將新技術快速應用於實際專案，例如在 Accton 實習中主動研究並導入 RSL-SQL 演算法。自主學習、追求卓越，是我最真實的寫照。",
+          exploration: "我積極主動地拓展知識邊界，也不只解被指派的題目：民宿官網案是我主動找到的真實客戶需求，Maybech 是我對市場結構、風險與執行紀律的長期研究實作。我善於閱讀論文並將新技術快速應用於實際專案，例如在 Accton 實習中主動研究並導入 RSL-SQL 演算法。自主學習、追求卓越，是我最真實的寫照。",
           traits: [
             "研究潛力：具備獨立思考與問題解決能力，善於將理論應用於實務",
             "產品思維：從業主與使用者痛點出發，主動找題目、定義方向、完整交付",
@@ -400,8 +400,8 @@ export const cvData = {
             github: "https://github.com/egger-meow/maybech"
           },
           {
-            id: "bnb8688",
-            name: "86.88 B&B Website",
+            id: "bnb-website",
+            name: "Boutique B&B Website",
             tag: "Real Client Product",
             period: "2026",
             description: "A real B&B client engagement landed through proactive outreach: a booking-oriented brand website built with Next.js, designed from the owner's pain points — photo storytelling, room details, and booking flow.",
@@ -411,7 +411,7 @@ export const cvData = {
               "Booking-conversion-oriented UI/UX: room showcases, photo narrative, call-to-action flow"
             ],
             stack: ["Next.js", "TypeScript", "React", "TailwindCSS"],
-            screenshot: "/Me/imgs/projects/8688.png",
+            screenshot: "/Me/imgs/projects/bnb.png",
             screenshotLabel: "Website screenshot",
             github: "https://github.com/egger-meow/eight-six-eight-eight"
           },
@@ -671,7 +671,7 @@ export const cvData = {
         content: {
           intro: "I am deeply passionate about AI and data science, with strong interest in both theoretical foundations and practical applications of machine learning. Through industry-academia collaboration projects and internship experiences, I have gained profound appreciation for the value and challenges of translating academic research into real-world solutions.",
           passion: "When facing research topics that truly interest me, I consistently demonstrate dedication and self-discipline: from achieving 2nd place out of 113 students in Introduction to AI, to independently developing anomaly detection models in the Hitachi Yungtay project, to leading the LLM-SQL integration initiative at Accton, I continuously prove that passion translates into solid technical capabilities and research outcomes. I aspire to deepen my exploration of cutting-edge AI/ML problems through graduate studies.",
-          exploration: "I proactively expand my knowledge boundaries — and I don't only solve assigned problems: the 86.88 B&B engagement was a real client need I found myself, and Maybech is my long-term study of market structure, risk, and execution discipline turned into working software. I excel at reading research papers and rapidly applying new techniques to real projects—for instance, independently researching and implementing the RSL-SQL algorithm during my Accton internship. Self-directed learning and pursuit of excellence define who I am.",
+          exploration: "I proactively expand my knowledge boundaries — and I don't only solve assigned problems: the B&B website engagement was a real client need I found myself, and Maybech is my long-term study of market structure, risk, and execution discipline turned into working software. I excel at reading research papers and rapidly applying new techniques to real projects—for instance, independently researching and implementing the RSL-SQL algorithm during my Accton internship. Self-directed learning and pursuit of excellence define who I am.",
           traits: [
             "Research Potential: Strong independent thinking and problem-solving skills, adept at bridging theory and practice",
             "Product Mindset: Start from owner and user pain points — find the problem, define the direction, deliver end to end",

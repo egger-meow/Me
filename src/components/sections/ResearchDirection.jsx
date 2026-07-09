@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
 import { Brain, FileSearch, RefreshCcw, Bot } from 'lucide-react';
 import SectionHeading from '../shared/SectionHeading';
+import TiltCard from '../shared/TiltCard';
 
 const topicIcons = [Brain, FileSearch, RefreshCcw, Bot];
 
@@ -14,11 +14,12 @@ const ResearchDirection = ({ section, isDark, index }) => (
       {section.topics.map((topic, idx) => {
         const Icon = topicIcons[idx % topicIcons.length];
         return (
-          <motion.div
+          <TiltCard
             key={topic.name}
-            whileHover={{ y: -4 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-            className={`rounded-xl border p-5 transition-colors duration-300 ${
+            maxTilt={6}
+            lift={-4}
+            spotlightColor={isDark ? 'rgba(168, 85, 247, 0.12)' : 'rgba(168, 85, 247, 0.07)'}
+            className={`relative overflow-hidden rounded-xl border p-5 transition-colors duration-300 ${
               isDark
                 ? 'bg-slate-800/50 border-purple-800/25 hover:border-purple-500/45 hover:shadow-glow-purple'
                 : 'bg-white border-gray-200 hover:border-purple-400/50 shadow-sm hover:shadow-md'
@@ -37,7 +38,7 @@ const ResearchDirection = ({ section, isDark, index }) => (
             <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-300' : 'text-gray-600'}`}>
               {topic.description}
             </p>
-          </motion.div>
+          </TiltCard>
         );
       })}
     </div>
