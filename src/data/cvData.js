@@ -239,7 +239,6 @@ export const cvData = {
       academic: {
         title: "學術與課程專題",
         navLabel: "專題",
-        epigraph: "來自沒有 AI 輔助的老年代 —— 純手工、一行一行刻出來的",
         content: [
           {
             name: "日立永大電梯產學合作專案",
@@ -253,6 +252,7 @@ export const cvData = {
           },
           {
             name: "課程 Side Projects",
+            epigraph: "來自沒有 AI 輔助的老年代 —— 純手工、一行一行刻出來的",
             subProjects: [
               {
                 name: "虛擬食物訂購服務後端系統",
@@ -574,7 +574,6 @@ export const cvData = {
       academic: {
         title: "Academic & Course Projects",
         navLabel: "Projects",
-        epigraph: "From the old era before AI assistance — hand-crafted, line by line",
         content: [
           {
             name: "Hitachi Yungtay Elevator Industry-Academia Cooperation Project",
@@ -588,6 +587,7 @@ export const cvData = {
           },
           {
             name: "Course Side Projects",
+            epigraph: "From the old era before AI assistance — hand-crafted, line by line",
             subProjects: [
               {
                 name: "Virtual Food Ordering Service Backend System",

@@ -5,13 +5,6 @@ import SectionHeading from '../shared/SectionHeading';
 const AcademicProjects = ({ section, isDark, index, onOpenImages, language }) => (
   <>
     <SectionHeading index={index} title={section.title} isDark={isDark} />
-    {section.epigraph && (
-      <p className={`-mt-2 mb-6 font-mono text-sm italic ${
-        isDark ? 'text-amber-200/70' : 'text-amber-600/80'
-      }`}>
-        「{section.epigraph}」
-      </p>
-    )}
     {section.content.map((project, pIdx) => (
       <div key={pIdx} className="mb-8 last:mb-0">
         <h3 className={`font-display text-lg font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -22,6 +15,14 @@ const AcademicProjects = ({ section, isDark, index, onOpenImages, language }) =>
             </span>
           )}
         </h3>
+
+        {project.epigraph && (
+          <p className={`-mt-1 mb-3 font-mono text-sm italic ${
+            isDark ? 'text-amber-200/70' : 'text-amber-600/80'
+          }`}>
+            {language === 'zh' ? `「${project.epigraph}」` : `"${project.epigraph}"`}
+          </p>
+        )}
 
         {project.description && (
           <ul className={`list-disc list-inside ml-1 space-y-1 text-sm md:text-base ${

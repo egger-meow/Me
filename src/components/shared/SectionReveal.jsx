@@ -12,14 +12,17 @@ const SectionReveal = ({ children, className = '', id, sectionKey }) => {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start 95%', 'end 5%'],
+    offset: ['start 92%', 'start 40%'],
   });
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
+  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 32, mass: 0.4 });
 
-  // 0 → section just entering from below; 1 → section just leaving above
-  const opacity = useTransform(progress, [0, 0.15, 0.82, 1], [0.3, 1, 1, 0.5]);
-  const scale = useTransform(progress, [0, 0.15, 0.85, 1], [0.965, 1, 1, 0.98]);
-  const y = useTransform(progress, [0, 0.15], [36, 0]);
+  // 0 → section entering from below; 1 → fully settled. Deliberately one-way:
+  // sections only ever brighten as they arrive and then hold at full opacity
+  // — no re-dimming on exit — so a fast nav-jump across many sections at
+  // once doesn't read as a multi-section strobe/flash.
+  const opacity = useTransform(progress, [0, 1], [0.55, 1]);
+  const scale = useTransform(progress, [0, 1], [0.98, 1]);
+  const y = useTransform(progress, [0, 1], [22, 0]);
 
   if (reduceMotion) {
     return (
