@@ -194,6 +194,14 @@ export default function Galaxy({
   rotationSpeed = 0.1,
   autoCenterRepulsion = 0,
   transparent = true,
+  // Scroll-scrub bridge: plain refs read once per frame inside the rAF loop
+  // (no React re-renders). scrollProgressRef.current ∈ [0,1] scrubs the
+  // starfield's travel depth + hue journey; scrollVelocityRef.current (px/s)
+  // adds a temporary hyperspace glow/speed burst while flick-scrolling.
+  scrollProgressRef = null,
+  scrollVelocityRef = null,
+  scrollTravel = 1.5,
+  scrollHueTravel = 70,
   ...rest
 }) {
   const ctnDom = useRef(null);
@@ -268,11 +276,26 @@ export default function Galaxy({
     const mesh = new Mesh(gl, { geometry, program });
     let animateId;
 
+    let smoothVelocityBoost = 0;
+
     function update(t) {
       animateId = requestAnimationFrame(update);
       if (!disableAnimation) {
         program.uniforms.uTime.value = t * 0.001;
-        program.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10.0;
+
+        // Scroll scrub: page scroll position offsets the star layers' depth
+        // (flying through the field) and shifts the hue — reversible, tied
+        // 1:1 to the scrollbar like a scrubbed frame sequence.
+        const scroll = scrollProgressRef?.current ?? 0;
+        const rawVel = Math.min(Math.abs(scrollVelocityRef?.current ?? 0) / 2500, 1);
+        smoothVelocityBoost += (rawVel - smoothVelocityBoost) * 0.08;
+
+        program.uniforms.uStarSpeed.value =
+          (t * 0.001 * starSpeed) / 10.0 + scroll * scrollTravel;
+        program.uniforms.uHueShift.value = hueShift + scroll * scrollHueTravel;
+        program.uniforms.uSpeed.value = speed * (1.0 + smoothVelocityBoost * 1.5);
+        program.uniforms.uGlowIntensity.value =
+          glowIntensity * (1.0 + smoothVelocityBoost * 0.5);
       }
 
       const lerpFactor = 0.05;
@@ -302,17 +325,21 @@ export default function Galaxy({
       targetMouseActive.current = 0.0;
     }
 
+    // Listen on window, not the container: the container sits behind the
+    // content card, so container-level mousemove only fires on the exposed
+    // background strips. Window-level tracking keeps the starfield reacting
+    // to the cursor everywhere on the page.
     if (mouseInteraction) {
-      ctn.addEventListener('mousemove', handleMouseMove);
-      ctn.addEventListener('mouseleave', handleMouseLeave);
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      document.documentElement.addEventListener('mouseleave', handleMouseLeave);
     }
 
     return () => {
       cancelAnimationFrame(animateId);
       window.removeEventListener('resize', resize);
       if (mouseInteraction) {
-        ctn.removeEventListener('mousemove', handleMouseMove);
-        ctn.removeEventListener('mouseleave', handleMouseLeave);
+        window.removeEventListener('mousemove', handleMouseMove);
+        document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
       }
       ctn.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
@@ -333,7 +360,11 @@ export default function Galaxy({
     rotationSpeed,
     repulsionStrength,
     autoCenterRepulsion,
-    transparent
+    transparent,
+    scrollProgressRef,
+    scrollVelocityRef,
+    scrollTravel,
+    scrollHueTravel
   ]);
 
   return <div ref={ctnDom} className="w-full h-full relative" {...rest} />;

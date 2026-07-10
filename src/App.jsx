@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useScroll, useSpring, useVelocity, useMotionValueEvent, useReducedMotion } from 'framer-motion';
 import { useReactToPrint } from 'react-to-print';
 import { cvData, SECTION_ORDER } from './data/cvData';
 import Galaxy from './components/Galaxy';
@@ -42,6 +43,22 @@ function App() {
   const data = cvData[language];
   const isDark = theme === 'dark';
   const activeSection = useActiveSection(SECTION_ORDER);
+  const reduceMotion = useReducedMotion();
+
+  // Bridge framer-motion's scroll values into plain refs the Galaxy's rAF
+  // loop reads each frame — page scroll scrubs the starfield's travel/hue,
+  // scroll velocity adds a hyperspace burst. No React re-renders involved.
+  const scrollProgressRef = useRef(0);
+  const scrollVelocityRef = useRef(0);
+  const { scrollY, scrollYProgress } = useScroll();
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 45, damping: 22, mass: 0.8 });
+  const scrollVelocity = useVelocity(scrollY);
+  useMotionValueEvent(smoothProgress, 'change', (v) => {
+    scrollProgressRef.current = reduceMotion ? 0 : v;
+  });
+  useMotionValueEvent(scrollVelocity, 'change', (v) => {
+    scrollVelocityRef.current = reduceMotion ? 0 : v;
+  });
 
   const handlePrint = useReactToPrint({
     content: () => resumeRef.current,
@@ -75,8 +92,12 @@ function App() {
             transparent={true}
             twinkleIntensity={0.35}
             rotationSpeed={0.015}
-            repulsionStrength={1.8}
+            repulsionStrength={2.2}
             speed={0.55}
+            scrollProgressRef={scrollProgressRef}
+            scrollVelocityRef={scrollVelocityRef}
+            scrollTravel={1.5}
+            scrollHueTravel={70}
           />
         </div>
       )}
