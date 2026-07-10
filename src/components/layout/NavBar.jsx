@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 // items (shared layoutId).
 const NavBar = ({ isDark, items, activeSection, onNavigate }) => (
   <div className={`px-4 py-2 border-t transition-all duration-500 ${isDark
-    ? 'border-purple-800/30 bg-gradient-to-r from-slate-900 via-purple-900/20 to-emerald-900/20 backdrop-blur-sm'
+    ? 'border-amber-500/15 bg-gradient-to-r from-[#0e0c08] via-[#191307]/60 to-[#241a0a]/60 backdrop-blur-sm'
     : 'border-gray-100 bg-white/80 backdrop-blur-sm'
     }`}>
     <div className="max-w-6xl mx-auto">

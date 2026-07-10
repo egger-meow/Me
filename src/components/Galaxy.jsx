@@ -69,23 +69,44 @@ vec3 hsv2rgb(vec3 c) {
 }
 
 float Star(vec2 uv, float flare) {
-  // Use Chebyshev distance for a blocky/square shape (Minecraft vibe)
-  float d = max(abs(uv.x), abs(uv.y));
-  
-  // Core block
-  float core = smoothstep(0.12, 0.08, d);
-  
-  // Subtle blocky glow
-  float glow = (0.02 * uGlowIntensity) / (d + 0.02);
-  
-  float m = (core + glow * 0.5) * uGlowIntensity * 3.0;
-  
-  // Add some flare rays but make them axis-aligned (cross shape) for blockiness
-  float rays = smoothstep(0.01, 0.0, abs(uv.x)) * smoothstep(1.0, 0.0, abs(uv.y));
-  rays += smoothstep(0.01, 0.0, abs(uv.y)) * smoothstep(1.0, 0.0, abs(uv.x));
-  m += rays * flare * uGlowIntensity * 0.5;
-  
+  // Round star: soft radial glow + bright core + diffraction spikes
+  float d = length(uv);
+
+  float m = (0.018 * uGlowIntensity) / (d + 0.008);
+  m += smoothstep(0.06, 0.012, d) * uGlowIntensity * 1.6;
+
+  // 4-point diffraction spikes (and a fainter 45°-rotated pair) on big stars
+  float rays = max(0.0, 1.0 - abs(uv.x * uv.y * 900.0));
+  m += rays * flare * uGlowIntensity;
+  vec2 ruv = MAT45 * uv;
+  rays = max(0.0, 1.0 - abs(ruv.x * ruv.y * 900.0));
+  m += rays * flare * 0.3 * uGlowIntensity;
+
+  // Contain each star inside its grid cell
+  m *= smoothstep(0.9, 0.2, d);
   return m;
+}
+
+float ValueNoise(vec2 p) {
+  vec2 i = floor(p);
+  vec2 f = fract(p);
+  f = f * f * (3.0 - 2.0 * f);
+  float a = Hash21(i);
+  float b = Hash21(i + vec2(1.0, 0.0));
+  float c = Hash21(i + vec2(0.0, 1.0));
+  float d = Hash21(i + vec2(1.0, 1.0));
+  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+float Fbm(vec2 p) {
+  float v = 0.0;
+  float amp = 0.5;
+  for (int i = 0; i < 4; i++) {
+    v += amp * ValueNoise(p);
+    p *= 2.03;
+    amp *= 0.5;
+  }
+  return v;
 }
 
 vec3 StarLayer(vec2 uv) {
@@ -113,6 +134,10 @@ vec3 StarLayer(vec2 uv) {
       float sat = length(base - vec3(dot(base, vec3(0.299, 0.587, 0.114)))) * uSaturation;
       float val = max(max(base.r, base.g), base.b);
       base = hsv2rgb(vec3(hue, sat, val));
+
+      // Champagne bias: pull every star partway toward warm gold so the
+      // field reads as dark-gold luxury while keeping per-star variety
+      base = mix(base, vec3(1.0, 0.86, 0.62), 0.3);
 
       vec2 pad = vec2(tris(seed * 34.0 + uTime * uSpeed / 10.0), tris(seed * 38.0 + uTime * uSpeed / 30.0)) - 0.5;
 
@@ -158,6 +183,16 @@ void main() {
   uv = mat2(uRotation.x, -uRotation.y, uRotation.y, uRotation.x) * uv;
 
   vec3 col = vec3(0.0);
+
+  // Nebula haze: slow-drifting fbm clouds in gold and royal purple, gently
+  // parallaxed by the scroll-scrubbed uStarSpeed — the "milky" galaxy body
+  float nebShape = Fbm(uv * 1.7 + uStarSpeed * 0.6 + vec2(uTime * 0.008, 0.0));
+  nebShape = smoothstep(0.42, 0.9, nebShape);
+  float nebMixT = Fbm(uv * 2.4 - uStarSpeed * 0.35 + vec2(0.0, uTime * 0.006));
+  vec3 nebGold = vec3(1.0, 0.72, 0.34);
+  vec3 nebRoyal = vec3(0.42, 0.26, 0.58);
+  vec3 nebCol = mix(nebRoyal, nebGold, smoothstep(0.3, 0.75, nebMixT));
+  col += nebCol * nebShape * 0.14 * uGlowIntensity;
 
   for (float i = 0.0; i < 1.0; i += 1.0 / NUM_LAYER) {
     float depth = fract(i + uStarSpeed * uSpeed);

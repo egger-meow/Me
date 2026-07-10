@@ -33,7 +33,7 @@ const CursorGlow = () => {
         x: '-50%',
         y: '-50%',
         background:
-          'radial-gradient(circle, rgba(16,185,129,0.10) 0%, rgba(168,85,247,0.08) 40%, transparent 70%)',
+          'radial-gradient(circle, rgba(245,197,66,0.10) 0%, rgba(168,85,247,0.07) 45%, transparent 70%)',
       }}
     />
   );

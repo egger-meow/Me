@@ -20,7 +20,7 @@ const ControlBar = ({
   onNavigate,
 }) => (
   <div className={`fixed top-0 left-0 right-0 shadow-lg z-50 transition-all duration-500 ${isDark
-    ? 'bg-gradient-to-r from-slate-900/95 via-purple-900/80 to-emerald-900/80 backdrop-blur-md border-b border-purple-800/20'
+    ? 'bg-gradient-to-r from-[#0e0c08]/95 via-[#1a1408]/90 to-[#241a0a]/90 backdrop-blur-md border-b border-amber-500/15'
     : 'bg-white/90 backdrop-blur-md border-b border-gray-100'
     }`}>
     <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">

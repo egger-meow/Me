@@ -162,7 +162,7 @@ const Hero = ({ data, isDark, onDownloadPDF }) => {
         <motion.div variants={item} className="flex justify-center md:justify-end shrink-0">
           <div className="relative">
             <div
-              className={`absolute -inset-1.5 rounded-full bg-gradient-to-tr from-emerald-500 via-purple-500 to-amber-400 blur-md ${
+              className={`absolute -inset-1.5 rounded-full bg-gradient-to-tr from-amber-500 via-yellow-200 to-purple-500 blur-md ${
                 isDark ? 'opacity-60 animate-pulse-ring' : 'opacity-25'
               }`}
               aria-hidden="true"

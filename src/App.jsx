@@ -76,7 +76,7 @@ function App() {
 
   return (
     <div className={`min-h-screen transition-all duration-500 relative overflow-x-clip ${isDark
-      ? 'bg-gradient-to-br from-slate-900 via-purple-900/30 to-emerald-900/20'
+      ? 'bg-gradient-to-br from-[#0b0a08] via-[#161009] to-[#1f1508]'
       : 'bg-gradient-to-br from-gray-50 to-white'
       }`}>
       {/* Galaxy background — dark mode only (perf) */}
@@ -86,9 +86,9 @@ function App() {
             mouseRepulsion={true}
             mouseInteraction={true}
             density={0.9}
-            glowIntensity={0.75}
-            saturation={0.65}
-            hueShift={240}
+            glowIntensity={0.8}
+            saturation={0.7}
+            hueShift={45}
             transparent={true}
             twinkleIntensity={0.35}
             rotationSpeed={0.015}
@@ -97,7 +97,7 @@ function App() {
             scrollProgressRef={scrollProgressRef}
             scrollVelocityRef={scrollVelocityRef}
             scrollTravel={1.5}
-            scrollHueTravel={70}
+            scrollHueTravel={35}
           />
         </div>
       )}
@@ -105,7 +105,7 @@ function App() {
       {/* Ambient aurora blobs — dark mode only */}
       {isDark && (
         <div aria-hidden="true" className="fixed inset-0 z-[2] pointer-events-none overflow-hidden">
-          <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-emerald-500/10 blur-[120px] animate-aurora" />
+          <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-amber-400/10 blur-[120px] animate-aurora" />
           <div className="absolute bottom-[-180px] right-[-120px] w-[520px] h-[520px] rounded-full bg-purple-500/10 blur-[130px] animate-aurora [animation-delay:-8s]" />
         </div>
       )}
@@ -129,7 +129,7 @@ function App() {
         <div
           ref={resumeRef}
           className={`max-w-5xl mx-auto shadow-2xl transition-all duration-500 rounded-2xl ${isDark
-            ? 'bg-gradient-to-br from-slate-800/95 via-purple-900/40 to-emerald-900/30 backdrop-blur-md border border-purple-800/30'
+            ? 'bg-gradient-to-br from-slate-900/95 via-[#1c1610]/85 to-amber-950/40 backdrop-blur-md border border-amber-500/15'
             : 'bg-white/95 backdrop-blur-sm border border-gray-100/50'
             }`}
         >
