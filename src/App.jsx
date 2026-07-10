@@ -51,7 +51,7 @@ function App() {
   const scrollProgressRef = useRef(0);
   const scrollVelocityRef = useRef(0);
   const { scrollY, scrollYProgress } = useScroll();
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 45, damping: 22, mass: 0.8 });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 60, damping: 26, mass: 0.6, restDelta: 0.0005 });
   const scrollVelocity = useVelocity(scrollY);
   useMotionValueEvent(smoothProgress, 'change', (v) => {
     scrollProgressRef.current = reduceMotion ? 0 : v;
@@ -96,7 +96,7 @@ function App() {
             speed={0.55}
             scrollProgressRef={scrollProgressRef}
             scrollVelocityRef={scrollVelocityRef}
-            scrollTravel={1.5}
+            scrollTravel={0.5}
             scrollHueTravel={35}
           />
         </div>

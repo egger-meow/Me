@@ -201,6 +201,15 @@ void main() {
     col += StarLayer(uv * scale + i * 453.32) * fade;
   }
 
+  // Highlight compression: a soft knee that leaves the dark field and
+  // midtones untouched but asymptotically caps the brightest channel below
+  // 1.0 — so a fast flick-scroll warp can never bloom the whole field to
+  // white (the old "跳白面" flash). Preserves gold hue; only the hottest
+  // regions above the knee compress.
+  float peak = max(col.r, max(col.g, col.b));
+  float knee = 0.7;
+  col /= (1.0 + max(0.0, peak - knee));
+
   if (uTransparent) {
     float alpha = length(col);
     alpha = smoothstep(0.0, 0.3, alpha);
@@ -311,26 +320,45 @@ export default function Galaxy({
     const mesh = new Mesh(gl, { geometry, program });
     let animateId;
 
+    // Scroll-warp state. `smoothVelocityBoost` ∈ [0,1] is how hard the reader
+    // is currently flick-scrolling (fast attack, slow release). `warpOffset`
+    // is a *monotonic* travel accumulator: scrolling injects forward
+    // flythrough that only ever coasts forward and eases to rest when the
+    // reader stops — so the field recovers its calm ambient state instead of
+    // snapping. uSpeed and uGlow stay constant during all this, so there's no
+    // depth churn and no white bloom.
     let smoothVelocityBoost = 0;
+    let warpOffset = 0;
+    let prevT = 0;
 
     function update(t) {
       animateId = requestAnimationFrame(update);
+      const dt = prevT === 0 ? 0.016 : Math.min((t - prevT) / 1000, 0.05);
+      prevT = t;
+
       if (!disableAnimation) {
         program.uniforms.uTime.value = t * 0.001;
 
-        // Scroll scrub: page scroll position offsets the star layers' depth
-        // (flying through the field) and shifts the hue — reversible, tied
-        // 1:1 to the scrollbar like a scrubbed frame sequence.
         const scroll = scrollProgressRef?.current ?? 0;
-        const rawVel = Math.min(Math.abs(scrollVelocityRef?.current ?? 0) / 2500, 1);
-        smoothVelocityBoost += (rawVel - smoothVelocityBoost) * 0.08;
+        const rawVel = Math.min(Math.abs(scrollVelocityRef?.current ?? 0) / 2200, 1);
+        // Fast attack / slow release so the warp blooms instantly on a flick
+        // and coasts back down smoothly once scrolling stops.
+        const rate = rawVel > smoothVelocityBoost ? 0.2 : 0.045;
+        smoothVelocityBoost += (rawVel - smoothVelocityBoost) * rate;
 
+        // Integrate forward-only warp travel (frame-by-frame flythrough).
+        warpOffset += smoothVelocityBoost * dt * 0.85;
+
+        // Star depth = gentle time drift + a small deterministic position
+        // scrub + the velocity warp. All three are continuous, so no pops.
         program.uniforms.uStarSpeed.value =
-          (t * 0.001 * starSpeed) / 10.0 + scroll * scrollTravel;
+          (t * 0.001 * starSpeed) / 10.0 + scroll * scrollTravel + warpOffset;
         program.uniforms.uHueShift.value = hueShift + scroll * scrollHueTravel;
-        program.uniforms.uSpeed.value = speed * (1.0 + smoothVelocityBoost * 1.5);
+        // Constant speed + only a whisper of extra glow — the shader's
+        // highlight compression caps anything brighter.
+        program.uniforms.uSpeed.value = speed;
         program.uniforms.uGlowIntensity.value =
-          glowIntensity * (1.0 + smoothVelocityBoost * 0.5);
+          glowIntensity * (1.0 + smoothVelocityBoost * 0.15);
       }
 
       const lerpFactor = 0.05;
@@ -341,7 +369,11 @@ export default function Galaxy({
 
       program.uniforms.uMouse.value[0] = smoothMousePos.current.x;
       program.uniforms.uMouse.value[1] = smoothMousePos.current.y;
-      program.uniforms.uMouseActiveFactor.value = smoothMouseActive.current;
+      // Fade cursor repulsion out while scrolling so the warp stays clean —
+      // the field stops being tugged by the pointer mid-scroll and eases
+      // back under cursor control once the reader settles.
+      program.uniforms.uMouseActiveFactor.value =
+        smoothMouseActive.current * (1.0 - smoothVelocityBoost);
 
       renderer.render({ scene: mesh });
     }
