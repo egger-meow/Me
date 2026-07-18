@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useScroll, useSpring, useVelocity, useMotionValueEvent, useReducedMotion } from 'framer-motion';
 import { useReactToPrint } from 'react-to-print';
 import { cvData, SECTION_ORDER } from './data/cvData';
@@ -44,6 +44,16 @@ function App() {
   const isDark = theme === 'dark';
   const activeSection = useActiveSection(SECTION_ORDER);
   const reduceMotion = useReducedMotion();
+
+  // Keep html's real background in sync with the active theme. A hard
+  // scroll jump (esp. dragging the scrollbar thumb) forces the browser to
+  // rasterize newly-revealed tiles on the spot; until painted, a tile falls
+  // back to this color — so it must always match the current theme, not a
+  // hardcoded default, or a theme switch would flash the *other* theme's
+  // color on the next fast scroll.
+  useEffect(() => {
+    document.documentElement.style.backgroundColor = isDark ? '#0b0a08' : '#f9fafb';
+  }, [isDark]);
 
   // Bridge framer-motion's scroll values into plain refs the Galaxy's rAF
   // loop reads each frame — page scroll scrubs the starfield's travel/hue,

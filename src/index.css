@@ -5,10 +5,18 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Matches the dark theme's page background. A fast scroll (especially
+       dragging the scrollbar thumb, which jumps the page near-instantly)
+       forces the browser to rasterize newly-revealed tiles on the spot;
+       until painted, a tile falls back to this color. Leaving html/body
+       at the browser default white caused a white flash on every hard
+       scroll jump. */
+    background-color: #0b0a08;
   }
 
   body {
     @apply font-sans antialiased;
+    background-color: inherit;
   }
 
   ::selection {
