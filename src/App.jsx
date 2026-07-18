@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import { useScroll, useSpring, useVelocity, useMotionValueEvent, useReducedMotion } from 'framer-motion';
 import { useReactToPrint } from 'react-to-print';
 import { cvData, SECTION_ORDER } from './data/cvData';
@@ -51,8 +51,12 @@ function App() {
   // back to this color — so it must always match the current theme, not a
   // hardcoded default, or a theme switch would flash the *other* theme's
   // color on the next fast scroll.
-  useEffect(() => {
-    document.documentElement.style.backgroundColor = isDark ? '#0b0a08' : '#f9fafb';
+  useLayoutEffect(() => {
+    const backgroundColor = isDark ? '#0b0a08' : '#f9fafb';
+
+    document.documentElement.style.backgroundColor = backgroundColor;
+    document.body.style.backgroundColor = backgroundColor;
+    document.getElementById('root')?.style.setProperty('background-color', backgroundColor);
   }, [isDark]);
 
   // Bridge framer-motion's scroll values into plain refs the Galaxy's rAF
