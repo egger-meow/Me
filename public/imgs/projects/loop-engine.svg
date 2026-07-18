@@ -1,0 +1,100 @@
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', ui-monospace, monospace">
+  <defs>
+    <radialGradient id="glowEmerald" cx="15%" cy="90%" r="60%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple" cx="90%" cy="10%" r="55%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#334155" opacity="0.5"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="720" fill="#0b1120"/>
+  <rect width="1280" height="720" fill="url(#dots)"/>
+  <rect width="1280" height="720" fill="url(#glowEmerald)"/>
+  <rect width="1280" height="720" fill="url(#glowPurple)"/>
+
+  <!-- Human + INBOX steering -->
+  <g>
+    <circle cx="150" cy="38" r="11" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+    <path d="M132,74 C132,56 168,56 168,74" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="150" y="93" text-anchor="middle" fill="#fbbf24" font-size="10" letter-spacing="2" font-weight="700">HUMAN</text>
+    <line x1="176" y1="45" x2="256" y2="45" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowAmber)"/>
+    <rect x="260" y="18" width="200" height="54" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="360" y="40" text-anchor="middle" fill="#fde68a" font-size="13" font-weight="700">INBOX.md</text>
+    <text x="360" y="57" text-anchor="middle" fill="#94a3b8" font-size="9.5">steer without interrupting</text>
+  </g>
+
+  <!-- Outer phase loop boundary -->
+  <rect x="60" y="95" width="1160" height="580" rx="26" fill="#0f172a" fill-opacity="0.5" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="3 7"/>
+  <text x="90" y="128" fill="#c4b5fd" font-size="13" letter-spacing="3" font-weight="700">PHASE LOOP</text>
+
+  <!-- Left column: roadmap / priorities -->
+  <rect x="100" y="155" width="220" height="68" rx="12" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="210" y="182" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">ROADMAP.md</text>
+  <text x="210" y="199" text-anchor="middle" fill="#94a3b8" font-size="9.5">phase authorization</text>
+
+  <line x1="210" y1="223" x2="210" y2="253" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="100" y="255" width="220" height="68" rx="12" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="210" y="282" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">PRIORITIES.md</text>
+  <text x="210" y="299" text-anchor="middle" fill="#94a3b8" font-size="9.5">ordered task queue</text>
+
+  <!-- Inner task loop boundary -->
+  <rect x="400" y="140" width="580" height="250" rx="20" fill="#0f172a" fill-opacity="0.4" stroke="#34d399" stroke-width="1.5"/>
+  <text x="430" y="163" fill="#6ee7b7" font-size="13" letter-spacing="3" font-weight="700">TASK LOOP</text>
+
+  <line x1="320" y1="289" x2="428" y2="259" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="430" y="225" width="150" height="68" rx="12" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="505" y="252" text-anchor="middle" fill="#e2e8f0" font-size="12.5" font-weight="700">PICK TASK</text>
+  <text x="505" y="269" text-anchor="middle" fill="#94a3b8" font-size="9">from priorities.md</text>
+
+  <line x1="580" y1="259" x2="628" y2="259" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="630" y="225" width="150" height="68" rx="12" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="705" y="252" text-anchor="middle" fill="#e2e8f0" font-size="12.5" font-weight="700">EXECUTE</text>
+  <text x="705" y="269" text-anchor="middle" fill="#94a3b8" font-size="9">agent works, unattended</text>
+
+  <line x1="780" y1="259" x2="828" y2="259" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="830" y="225" width="120" height="68" rx="12" fill="#1e293b" stroke="#34d399" stroke-width="1.5"/>
+  <text x="890" y="252" text-anchor="middle" fill="#d1fae5" font-size="12" font-weight="700">TASK GATE</text>
+  <text x="890" y="269" text-anchor="middle" fill="#94a3b8" font-size="8.5">lint · test · build</text>
+
+  <path d="M890,225 C890,183 522,183 507,225" fill="none" stroke="#34d399" stroke-width="1.75" marker-end="url(#arrow)"/>
+  <text x="698" y="180" text-anchor="middle" fill="#6ee7b7" font-size="9" font-style="italic">next task</text>
+
+  <!-- Steering into the loop -->
+  <path d="M360,72 Q430,150 505,223" fill="none" stroke="#f59e0b" stroke-width="1.75" stroke-dasharray="5 5" marker-end="url(#arrowAmber)"/>
+
+  <!-- Phase gate -->
+  <line x1="887" y1="293" x2="775" y2="538" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="862" y="330" fill="#94a3b8" font-size="9.5" font-style="italic">after N tasks</text>
+
+  <rect x="620" y="540" width="220" height="68" rx="12" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="730" y="567" text-anchor="middle" fill="#fde68a" font-size="13" font-weight="700">PHASE GATE</text>
+  <text x="730" y="584" text-anchor="middle" fill="#94a3b8" font-size="9.5">integration · e2e tests</text>
+
+  <!-- Close the phase loop back to roadmap -->
+  <path d="M620,574 L150,574 L150,189 L102,189" fill="none" stroke="#a78bfa" stroke-width="1.75" marker-end="url(#arrow)"/>
+  <text x="128" y="410" fill="#c4b5fd" font-size="9" font-style="italic" transform="rotate(-90 128 410)">next phase</text>
+
+  <!-- History / audit trail -->
+  <line x1="840" y1="574" x2="898" y2="574" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="900" y="540" width="260" height="68" rx="12" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="1030" y="567" text-anchor="middle" fill="#ddd6fe" font-size="13" font-weight="700">CHANGELOG.md</text>
+  <text x="1030" y="584" text-anchor="middle" fill="#94a3b8" font-size="9.5">append-only audit trail</text>
+
+  <text x="640" y="705" text-anchor="middle" fill="#64748b" font-size="10.5" letter-spacing="1">pre-authorized autonomy — human steers via INBOX.md, never blocks the loop</text>
+</svg>

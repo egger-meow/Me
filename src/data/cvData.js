@@ -50,6 +50,22 @@ export const cvData = {
         intro: "不只是課堂作業 —— 這些是真實運行、有真實使用者或真實資金風險考量的系統。",
         featured: [
           {
+            id: "loop-engine",
+            name: "Loop Engine — AI 自主編碼框架",
+            tag: "AI Agent 自主開發鷹架",
+            period: "2026",
+            description: "讓 AI coding agent 能長時間自主工作、減少逐步核准中斷的鷹架框架：以結構化 Markdown 文件取代反覆確認，把方向、現況、優先序、歷史四類「真相來源」標準化。",
+            highlights: [
+              "雙層巢狀迴圈設計：Task Loop（單一任務執行）與 Phase Loop（整個開發階段）各自有明確的把關機制",
+              "Task Gate（lint / test / build 快速檢查）與 Phase Gate（整合測試、E2E 等完整驗收）分層把關，避免壞掉的變更累積",
+              "INBOX.md 讓人類隨時插入指示引導方向、卻不打斷 agent 正在執行的迴圈；CHANGELOG.md 與稽核紀錄只增不改"
+            ],
+            stack: ["Markdown", "Git", "Shell / PowerShell", "AI Coding Agents"],
+            screenshot: "/Me/imgs/projects/loop-engine.svg",
+            screenshotLabel: "架構圖",
+            github: "https://github.com/egger-meow/loop-engine"
+          },
+          {
             id: "maybech",
             name: "Maybech",
             tag: "風險導向交易基礎設施",
@@ -80,22 +96,6 @@ export const cvData = {
             screenshot: "/Me/imgs/projects/bnb.png",
             screenshotLabel: "網站截圖",
             github: "https://github.com/egger-meow/eight-six-eight-eight"
-          },
-          {
-            id: "donationbar",
-            name: "DonationBar — 綠界金流 × OBS",
-            tag: "金流整合 × 即時系統",
-            period: "2026",
-            description: "台灣實況主的捐款解決方案：綠界 ECPay 金流整合、Server-Sent Events 即時進度條 OBS overlay、與管理後台。",
-            highlights: [
-              "信用卡 / ATM / 超商付款整合，付款完成零延遲更新進度條",
-              "SSE 即時推播架構 —— 進度條無需重新整理即時反應",
-              "透明背景動畫 overlay、可自訂樣式、目標金額追蹤與捐款紀錄後台"
-            ],
-            stack: ["Node.js", "ECPay API", "SSE", "OBS Overlay"],
-            screenshot: "/Me/imgs/projects/donationbar.png",
-            screenshotLabel: "Overlay 截圖",
-            github: "https://github.com/egger-meow/donationBar-ecpay-obs"
           }
         ],
         explorationsTitle: "更多探索",
@@ -107,10 +107,10 @@ export const cvData = {
             github: "https://github.com/egger-meow/intelligent-course-system"
           },
           {
-            name: "JJ-Meet",
-            description: "旅遊導向交友 App：Node/Express 後端、PostgreSQL + PostGIS 地理配對、Socket.io 即時聊天、React Native (Expo) 前端。",
-            stack: ["React Native", "PostGIS", "Socket.io", "Redis"],
-            github: "https://github.com/egger-meow/jj-meet"
+            name: "DonationBar — 綠界金流 × OBS",
+            description: "台灣實況主的捐款解決方案：綠界 ECPay 金流整合、Server-Sent Events 即時進度條 OBS overlay、與管理後台。",
+            stack: ["Node.js", "ECPay API", "SSE", "OBS Overlay"],
+            github: "https://github.com/egger-meow/donationBar-ecpay-obs"
           }
         ]
       },
@@ -385,6 +385,22 @@ export const cvData = {
         intro: "Not classroom exercises — these are systems that actually run, with real users or real capital-risk considerations.",
         featured: [
           {
+            id: "loop-engine",
+            name: "Loop Engine — Autonomous AI Coding Framework",
+            tag: "AI Agent Autonomy Scaffold",
+            period: "2026",
+            description: "A scaffolding framework that lets AI coding agents work autonomously for long stretches instead of stopping for constant approval: structured Markdown files replace back-and-forth confirmation, standardizing four canonical sources of truth — direction, current state, priority, and history.",
+            highlights: [
+              "Two-level nested loop design: a Task Loop (single task execution) and a Phase Loop (an entire development phase), each with its own explicit gates",
+              "Layered gating — fast Task Gates (lint / test / build) and thorough Phase Gates (integration / E2E) — so broken changes never accumulate",
+              "INBOX.md lets a human steer direction at any time without breaking the agent's running loop; CHANGELOG.md and audit files stay append-only"
+            ],
+            stack: ["Markdown", "Git", "Shell / PowerShell", "AI Coding Agents"],
+            screenshot: "/Me/imgs/projects/loop-engine.svg",
+            screenshotLabel: "Architecture diagram",
+            github: "https://github.com/egger-meow/loop-engine"
+          },
+          {
             id: "maybech",
             name: "Maybech",
             tag: "Risk-Aware Trading Infrastructure",
@@ -415,22 +431,6 @@ export const cvData = {
             screenshot: "/Me/imgs/projects/bnb.png",
             screenshotLabel: "Website screenshot",
             github: "https://github.com/egger-meow/eight-six-eight-eight"
-          },
-          {
-            id: "donationbar",
-            name: "DonationBar — ECPay × OBS",
-            tag: "Payments × Real-Time Systems",
-            period: "2026",
-            description: "A donation solution for Taiwanese streamers: ECPay payment integration, a Server-Sent Events real-time progress bar OBS overlay, and an admin dashboard.",
-            highlights: [
-              "Credit card / ATM / convenience-store payment integration with zero-delay progress updates on completion",
-              "SSE push architecture — the progress bar reacts instantly without refreshing",
-              "Transparent animated overlay, customizable styling, goal tracking, and donation records admin"
-            ],
-            stack: ["Node.js", "ECPay API", "SSE", "OBS Overlay"],
-            screenshot: "/Me/imgs/projects/donationbar.png",
-            screenshotLabel: "Overlay screenshot",
-            github: "https://github.com/egger-meow/donationBar-ecpay-obs"
           }
         ],
         explorationsTitle: "More Explorations",
@@ -442,10 +442,10 @@ export const cvData = {
             github: "https://github.com/egger-meow/intelligent-course-system"
           },
           {
-            name: "JJ-Meet",
-            description: "Travel-oriented dating app: Node/Express backend, PostgreSQL + PostGIS geo-matching, Socket.io real-time chat, React Native (Expo) frontend.",
-            stack: ["React Native", "PostGIS", "Socket.io", "Redis"],
-            github: "https://github.com/egger-meow/jj-meet"
+            name: "DonationBar — ECPay × OBS",
+            description: "A donation solution for Taiwanese streamers: ECPay payment integration, a Server-Sent Events real-time progress bar OBS overlay, and an admin dashboard.",
+            stack: ["Node.js", "ECPay API", "SSE", "OBS Overlay"],
+            github: "https://github.com/egger-meow/donationBar-ecpay-obs"
           }
         ]
       },
