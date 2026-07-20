@@ -172,7 +172,7 @@ This project is open source and available under the MIT License.
 **Chun-Ting Hou (侯均頲)**
 - GitHub: [@egger-meow](https://github.com/egger-meow)
 - LinkedIn: [JJ Mow](https://www.linkedin.com/in/jj-mow-8b903b295)
-- Email: inpire.mg09@nycu.edu.tw
+- Email: jjmow.cs15@nycu.edu.tw
 
 ## 🙏 Acknowledgments
 
