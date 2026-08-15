@@ -89,7 +89,7 @@ function App() {
   }));
 
   return (
-    <div className={`min-h-screen transition-all duration-500 relative overflow-x-clip ${isDark
+    <div className={`min-h-screen transition-colors duration-500 relative overflow-x-clip ${isDark
       ? 'bg-gradient-to-br from-[#0b0a08] via-[#161009] to-[#1f1508]'
       : 'bg-gradient-to-br from-gray-50 to-white'
       }`}>
@@ -142,7 +142,7 @@ function App() {
       <div className="pt-32 pb-12 relative z-10 px-4">
         <div
           ref={resumeRef}
-          className={`max-w-5xl mx-auto shadow-2xl transition-all duration-500 rounded-2xl ${isDark
+          className={`max-w-5xl mx-auto shadow-2xl transition-colors duration-500 rounded-2xl ${isDark
             ? 'bg-gradient-to-br from-slate-900/95 via-[#1c1610]/85 to-amber-950/40 backdrop-blur-md border border-amber-500/15'
             : 'bg-white/95 backdrop-blur-sm border border-gray-100/50'
             }`}

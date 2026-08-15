@@ -1,5 +1,5 @@
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 
 const vertexShader = `
 attribute vec2 uv;
@@ -196,19 +196,19 @@ void main() {
 
   for (float i = 0.0; i < 1.0; i += 1.0 / NUM_LAYER) {
     float depth = fract(i + uStarSpeed * uSpeed);
-    float scale = mix(20.0 * uDensity, 0.5 * uDensity, depth);
-    float fade = depth * smoothstep(1.0, 0.9, depth);
+    float scale = mix(20.0 * uDensity, 5.0 * uDensity, depth);
+    float fade = smoothstep(0.0, 0.25, depth) * smoothstep(1.0, 0.75, depth);
     col += StarLayer(uv * scale + i * 453.32) * fade;
   }
 
-  // Highlight compression: a soft knee that leaves the dark field and
-  // midtones untouched but asymptotically caps the brightest channel below
-  // 1.0 — so a fast flick-scroll warp can never bloom the whole field to
-  // white (the old "跳白面" flash). Preserves gold hue; only the hottest
-  // regions above the knee compress.
+  // Highlight compression: preserve color hue and clamp brightness so rapid
+  // scroll flythrough never blooms the background into white.
   float peak = max(col.r, max(col.g, col.b));
   float knee = 0.7;
-  col /= (1.0 + max(0.0, peak - knee));
+  if (peak > knee) {
+    col = (col / peak) * (knee + (peak - knee) / (1.0 + (peak - knee)));
+  }
+  col = clamp(col, 0.0, 1.0);
 
   if (uTransparent) {
     float alpha = length(col);
@@ -221,9 +221,12 @@ void main() {
 }
 `;
 
-export default function Galaxy({
-  focal = [0.5, 0.5],
-  rotation = [1.0, 0.0],
+const DEFAULT_FOCAL = [0.5, 0.5];
+const DEFAULT_ROTATION = [1.0, 0.0];
+
+function Galaxy({
+  focal = DEFAULT_FOCAL,
+  rotation = DEFAULT_ROTATION,
   starSpeed = 0.5,
   density = 1,
   hueShift = 140,
@@ -233,15 +236,11 @@ export default function Galaxy({
   glowIntensity = 0.3,
   saturation = 0.0,
   mouseRepulsion = true,
-  repulsionStrength = 2,
   twinkleIntensity = 0.3,
   rotationSpeed = 0.1,
+  repulsionStrength = 2,
   autoCenterRepulsion = 0,
   transparent = true,
-  // Scroll-scrub bridge: plain refs read once per frame inside the rAF loop
-  // (no React re-renders). scrollProgressRef.current ∈ [0,1] scrubs the
-  // starfield's travel depth + hue journey; scrollVelocityRef.current (px/s)
-  // adds a temporary hyperspace glow/speed burst while flick-scrolling.
   scrollProgressRef = null,
   scrollVelocityRef = null,
   scrollTravel = 1.5,
@@ -253,6 +252,11 @@ export default function Galaxy({
   const smoothMousePos = useRef({ x: 0.5, y: 0.5 });
   const targetMouseActive = useRef(0.0);
   const smoothMouseActive = useRef(0.0);
+
+  const focalX = focal[0];
+  const focalY = focal[1];
+  const rotX = rotation[0];
+  const rotY = rotation[1];
 
   useEffect(() => {
     if (!ctnDom.current) return;
@@ -296,8 +300,8 @@ export default function Galaxy({
         uResolution: {
           value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height)
         },
-        uFocal: { value: new Float32Array(focal) },
-        uRotation: { value: new Float32Array(rotation) },
+        uFocal: { value: new Float32Array([focalX, focalY]) },
+        uRotation: { value: new Float32Array([rotX, rotY]) },
         uStarSpeed: { value: starSpeed },
         uDensity: { value: density },
         uHueShift: { value: hueShift },
@@ -320,13 +324,6 @@ export default function Galaxy({
     const mesh = new Mesh(gl, { geometry, program });
     let animateId;
 
-    // Scroll-warp state. `smoothVelocityBoost` ∈ [0,1] is how hard the reader
-    // is currently flick-scrolling (fast attack, slow release). `warpOffset`
-    // is a *monotonic* travel accumulator: scrolling injects forward
-    // flythrough that only ever coasts forward and eases to rest when the
-    // reader stops — so the field recovers its calm ambient state instead of
-    // snapping. uSpeed and uGlow stay constant during all this, so there's no
-    // depth churn and no white bloom.
     let smoothVelocityBoost = 0;
     let warpOffset = 0;
     let prevT = 0;
@@ -341,21 +338,14 @@ export default function Galaxy({
 
         const scroll = scrollProgressRef?.current ?? 0;
         const rawVel = Math.min(Math.abs(scrollVelocityRef?.current ?? 0) / 2200, 1);
-        // Fast attack / slow release so the warp blooms instantly on a flick
-        // and coasts back down smoothly once scrolling stops.
         const rate = rawVel > smoothVelocityBoost ? 0.2 : 0.045;
         smoothVelocityBoost += (rawVel - smoothVelocityBoost) * rate;
 
-        // Integrate forward-only warp travel (frame-by-frame flythrough).
         warpOffset += smoothVelocityBoost * dt * 0.85;
 
-        // Star depth = gentle time drift + a small deterministic position
-        // scrub + the velocity warp. All three are continuous, so no pops.
         program.uniforms.uStarSpeed.value =
           (t * 0.001 * starSpeed) / 10.0 + scroll * scrollTravel + warpOffset;
         program.uniforms.uHueShift.value = hueShift + scroll * scrollHueTravel;
-        // Constant speed + only a whisper of extra glow — the shader's
-        // highlight compression caps anything brighter.
         program.uniforms.uSpeed.value = speed;
         program.uniforms.uGlowIntensity.value =
           glowIntensity * (1.0 + smoothVelocityBoost * 0.15);
@@ -369,9 +359,6 @@ export default function Galaxy({
 
       program.uniforms.uMouse.value[0] = smoothMousePos.current.x;
       program.uniforms.uMouse.value[1] = smoothMousePos.current.y;
-      // Fade cursor repulsion out while scrolling so the warp stays clean —
-      // the field stops being tugged by the pointer mid-scroll and eases
-      // back under cursor control once the reader settles.
       program.uniforms.uMouseActiveFactor.value =
         smoothMouseActive.current * (1.0 - smoothVelocityBoost);
 
@@ -392,10 +379,6 @@ export default function Galaxy({
       targetMouseActive.current = 0.0;
     }
 
-    // Listen on window, not the container: the container sits behind the
-    // content card, so container-level mousemove only fires on the exposed
-    // background strips. Window-level tracking keeps the starfield reacting
-    // to the cursor everywhere on the page.
     if (mouseInteraction) {
       window.addEventListener('mousemove', handleMouseMove, { passive: true });
       document.documentElement.addEventListener('mouseleave', handleMouseLeave);
@@ -412,8 +395,10 @@ export default function Galaxy({
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [
-    focal,
-    rotation,
+    focalX,
+    focalY,
+    rotX,
+    rotY,
     starSpeed,
     density,
     hueShift,
@@ -436,3 +421,5 @@ export default function Galaxy({
 
   return <div ref={ctnDom} className="w-full h-full relative" {...rest} />;
 }
+
+export default memo(Galaxy);
