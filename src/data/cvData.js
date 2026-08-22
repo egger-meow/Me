@@ -29,7 +29,7 @@ export const cvData = {
       kicker: "SOFTWARE ENGINEER · SYSTEMS BUILDER",
       tagline: "我打造真實運行的系統",
       subline: "從風險導向的交易基礎設施、真實客戶產品，到應用 AI 系統 —— 下一章：NYCU 數據科學與工程研究所，深入 NLP 與資訊檢索研究。",
-      photo: "/Me/imgs/hero/portrait.jpg",
+      photo: "/imgs/hero/portrait.jpg",
       photoLabel: "個人照片",
       stats: [
         { value: "2026", label: "NYCU 數據所碩士入學" },
@@ -61,7 +61,7 @@ export const cvData = {
               "INBOX.md 讓人類隨時插入指示引導方向、卻不打斷 agent 正在執行的迴圈；CHANGELOG.md 與稽核紀錄只增不改"
             ],
             stack: ["Markdown", "Git", "Shell / PowerShell", "AI Coding Agents"],
-            screenshot: "/Me/imgs/projects/loop-engine.svg",
+            screenshot: "/imgs/projects/loop-engine.svg",
             screenshotLabel: "架構圖",
             github: "https://github.com/egger-meow/loop-engine"
           },
@@ -77,7 +77,7 @@ export const cvData = {
               "動態倉位規則、BTC 市場狀態（regime）追蹤、帳戶快照、通知系統與訊號持久化"
             ],
             stack: ["Python", "FastAPI", "WebSocket", "Next.js", "OKX API"],
-            screenshot: "/Me/imgs/projects/maybech.png",
+            screenshot: "/imgs/projects/maybech.png",
             screenshotLabel: "儀表板截圖",
             github: "https://github.com/egger-meow/maybech"
           },
@@ -93,7 +93,7 @@ export const cvData = {
               "訂房轉換導向的 UI/UX：房型展示、照片敘事、行動呼籲動線"
             ],
             stack: ["Next.js", "TypeScript", "React", "TailwindCSS"],
-            screenshot: "/Me/imgs/projects/bnb.png",
+            screenshot: "/imgs/projects/bnb.png",
             screenshotLabel: "網站截圖",
             github: "https://github.com/egger-meow/eight-six-eight-eight"
           }
@@ -138,7 +138,7 @@ export const cvData = {
               "經常負責協助 程式碼重構與最佳化，憑藉清晰的架構設計直覺與 AI 工具整合能力，顯著提升專案品質",
               "擔任團隊 Git 專家，協助版本控管流程設計與問題解決"
             ],
-            images: ["/Me/imgs/accton_page-0001.jpg", "/Me/imgs/accton.jpg"]
+            images: ["/imgs/accton_page-0001.jpg", "/imgs/accton.jpg"]
           },
           {
             company: "台灣積體電路製造股份有限公司 (TSMC)",
@@ -150,7 +150,7 @@ export const cvData = {
               "使用技術：TypeScript (React)、Java、Azure DevOps、CI/CD",
               "實踐 Scrum 敏捷開發流程，參與每日站立會議與迭代交付"
             ],
-            images: ["/Me/imgs/tsmc.jpg"]
+            images: ["/imgs/tsmc.jpg"]
           }
         ]
       },
@@ -165,7 +165,7 @@ export const cvData = {
             details: [
               "錄取 115 學年度 數據科學與工程研究所 碩士班"
             ],
-            images: ["/Me/imgs/數據所報到證明.jpg"]
+            images: ["/imgs/數據所報到證明.jpg"]
           },
           {
             school: "國立陽明交通大學（NYCU）學士",
@@ -180,11 +180,11 @@ export const cvData = {
             diplomas: [
               {
                 type: "中文畢業證書",
-                image: "/Me/imgs/nycu_Diplonma_ch.jpg"
+                image: "/imgs/nycu_Diplonma_ch.jpg"
               },
               {
                 type: "英文畢業證書",
-                image: "/Me/imgs/nycu_Diplonma_en.jpg"
+                image: "/imgs/nycu_Diplonma_en.jpg"
               }
             ]
           }
@@ -262,19 +262,19 @@ export const cvData = {
               {
                 name: "Wallpaper Sharing Platform",
                 description: "使用Bootstrap、Node.js與MongoDB開發壁紙分享平台，實現照片上傳、瀏覽、標籤搜尋、點讚功能 (前端網頁系統開發概論課程專題)",
-                image: "/Me/imgs/wallpaper.png",
+                image: "/imgs/wallpaper.png",
                 github: "https://github.com/egger-meow/Wallpaper_Project"
               },
               {
                 name: "電商平台（E-commerce Platform）",
                 description: "使用QT框架，以QMap作為資料儲存，實現商品搜尋、購物車管理、訂單處理及商品評價功能，並有效解決商品資料庫儲存問題（進階物件導向課程專題）",
-                image: "/Me/imgs/QT.png",
+                image: "/imgs/QT.png",
                 github: "https://github.com/egger-meow/SHOPEE_QT"
               },
               {
                 name: "Mini Metro遊戲開發",
                 description: "使用C++及SDL2及物件導向程式設計(OOP)實作模擬經營地鐵遊戲，負責上下車演算法設計、乘客移動、物理加減速模擬及畫面輸出效果 (物件導向課程專題)",
-                image: "/Me/imgs/minimetro.png",
+                image: "/imgs/minimetro.png",
                 github: "https://docs.google.com/document/d/1Rya2Sh9H7-ad1qCRE5G3tJQL3_yUr4lzfzfxyyvYU2c/edit?usp=sharing"
               }
             ],
@@ -315,7 +315,7 @@ export const cvData = {
             role: "成員",
             period: "2023.09 - 2024.05",
             description: "深入學習並研討機器學習模型如GAN、Transformer，定期進行團隊報告",
-            image: "/Me/imgs/GoogleDevelopmentClub.jpg"
+            image: "/imgs/GoogleDevelopmentClub.jpg"
           },
           {
             organization: "風城吉他社",
@@ -329,7 +329,7 @@ export const cvData = {
         title: "語言能力",
         navLabel: "語言",
         content: "中文（母語）| 英文（精通  多益 870, 雅思 6.5）",
-        ieltsTranscript: "/Me/imgs/雅思成績單_page-0001.jpg",
+        ieltsTranscript: "/imgs/雅思成績單_page-0001.jpg",
         ieltsLabel: "查看雅思成績單"
       },
       personality: {
@@ -364,7 +364,7 @@ export const cvData = {
       kicker: "SOFTWARE ENGINEER · SYSTEMS BUILDER",
       tagline: "I build systems that actually run",
       subline: "From risk-aware trading infrastructure and real client products to applied AI systems — next chapter: NLP & information retrieval research at NYCU's Institute of Data Science and Engineering.",
-      photo: "/Me/imgs/hero/portrait.jpg",
+      photo: "/imgs/hero/portrait.jpg",
       photoLabel: "Portrait",
       stats: [
         { value: "2026", label: "Incoming NYCU IDSE M.S." },
@@ -396,7 +396,7 @@ export const cvData = {
               "INBOX.md lets a human steer direction at any time without breaking the agent's running loop; CHANGELOG.md and audit files stay append-only"
             ],
             stack: ["Markdown", "Git", "Shell / PowerShell", "AI Coding Agents"],
-            screenshot: "/Me/imgs/projects/loop-engine.svg",
+            screenshot: "/imgs/projects/loop-engine.svg",
             screenshotLabel: "Architecture diagram",
             github: "https://github.com/egger-meow/loop-engine"
           },
@@ -412,7 +412,7 @@ export const cvData = {
               "Dynamic position rules, BTC regime tracking, account snapshots, notifications, and persisted signals"
             ],
             stack: ["Python", "FastAPI", "WebSocket", "Next.js", "OKX API"],
-            screenshot: "/Me/imgs/projects/maybech.png",
+            screenshot: "/imgs/projects/maybech.png",
             screenshotLabel: "Dashboard screenshot",
             github: "https://github.com/egger-meow/maybech"
           },
@@ -428,7 +428,7 @@ export const cvData = {
               "Booking-conversion-oriented UI/UX: room showcases, photo narrative, call-to-action flow"
             ],
             stack: ["Next.js", "TypeScript", "React", "TailwindCSS"],
-            screenshot: "/Me/imgs/projects/bnb.png",
+            screenshot: "/imgs/projects/bnb.png",
             screenshotLabel: "Website screenshot",
             github: "https://github.com/egger-meow/eight-six-eight-eight"
           }
@@ -473,7 +473,7 @@ export const cvData = {
               "Frequently responsible for code refactoring and optimization, significantly improving project quality with clear architecture design intuition and AI tool integration capabilities",
               "Served as team Git expert, assisting with version control process design and problem solving"
             ],
-            images: ["/Me/imgs/accton_page-0001.jpg", "/Me/imgs/accton.jpg"]
+            images: ["/imgs/accton_page-0001.jpg", "/imgs/accton.jpg"]
           },
           {
             company: "Taiwan Semiconductor Manufacturing Company (TSMC)",
@@ -485,7 +485,7 @@ export const cvData = {
               "Technologies: TypeScript (React), Java, Azure DevOps, CI/CD",
               "Practiced Scrum agile development, participated in daily stand-ups and iterative delivery"
             ],
-            images: ["/Me/imgs/tsmc.jpg"]
+            images: ["/imgs/tsmc.jpg"]
           }
         ]
       },
@@ -500,7 +500,7 @@ export const cvData = {
             details: [
               "Admitted to Master's Program in Data Science and Engineering"
             ],
-            images: ["/Me/imgs/數據所報到證明.jpg"]
+            images: ["/imgs/數據所報到證明.jpg"]
           },
           {
             school: "National Yang Ming Chiao Tung University (NYCU), Bachelor",
@@ -515,11 +515,11 @@ export const cvData = {
             diplomas: [
               {
                 type: "Chinese Diploma",
-                image: "/Me/imgs/nycu_Diplonma_ch.jpg"
+                image: "/imgs/nycu_Diplonma_ch.jpg"
               },
               {
                 type: "English Diploma",
-                image: "/Me/imgs/nycu_Diplonma_en.jpg"
+                image: "/imgs/nycu_Diplonma_en.jpg"
               }
             ]
           }
@@ -597,19 +597,19 @@ export const cvData = {
               {
                 name: "Wallpaper Sharing Platform",
                 description: "Developed wallpaper sharing platform using Bootstrap, Node.js, and MongoDB, implementing photo upload, browsing, tag search, and like features (Front-end Web System Development course project)",
-                image: "/Me/imgs/wallpaper.png",
+                image: "/imgs/wallpaper.png",
                 github: "https://github.com/egger-meow/Wallpaper_Project.git"
               },
               {
                 name: "E-commerce Platform",
                 description: "Used QT framework with QMap for data storage, implemented product search, cart management, order processing, and product reviews (Advanced OOP course project)",
-                image: "/Me/imgs/QT.png",
+                image: "/imgs/QT.png",
                 github: "https://github.com/egger-meow/SHOPEE_QT.git"
               },
               {
                 name: "Mini Metro Game Development",
                 description: "Implemented subway management simulation game using C++ and SDL2 with OOP, responsible for boarding/alighting algorithms, passenger movement, physics acceleration/deceleration simulation, and visual output (OOP course project)",
-                image: "/Me/imgs/minimetro.png",
+                image: "/imgs/minimetro.png",
                 github: "https://docs.google.com/document/d/1Rya2Sh9H7-ad1qCRE5G3tJQL3_yUr4lzfzfxyyvYU2c/edit?usp=sharing"
               }
             ],
@@ -650,7 +650,7 @@ export const cvData = {
             role: "Member",
             period: "2023.09 - 2024.05",
             description: "In-depth study and discussion of ML models like GAN, Transformer, regular team presentations",
-            image: "/Me/imgs/GoogleDevelopmentClub.jpg"
+            image: "/imgs/GoogleDevelopmentClub.jpg"
           },
           {
             organization: "Wind City Guitar Club",
@@ -664,7 +664,7 @@ export const cvData = {
         title: "Languages",
         navLabel: "Languages",
         content: "Chinese (Native) | English (Proficient | TOEIC 870, IELTS 6.5)",
-        ieltsTranscript: "/Me/imgs/雅思成績單_page-0001.jpg",
+        ieltsTranscript: "/imgs/雅思成績單_page-0001.jpg",
         ieltsLabel: "View IELTS Transcript"
       },
       personality: {

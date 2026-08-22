@@ -1,6 +1,6 @@
 # Interactive CV/Resume Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=github)](https://egger-meow.github.io/Me/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=cloudflare)](https://me.jjmowlab.com/)
 
 A modern, interactive digital CV/resume built with React, featuring smooth animations, theme switching, multilingual support, and a beautiful galaxy background effect.
 
@@ -21,9 +21,9 @@ A modern, interactive digital CV/resume built with React, featuring smooth anima
 - **Build Tool**: Vite
 - **Styling**: TailwindCSS
 - **Icons**: Lucide React
-- **PDF Generation**: jsPDF + html2canvas
-- **3D Effects**: Custom Galaxy component with particle system
-- **Deployment**: GitHub Pages
+- **PDF Generation**: react-to-print
+- **3D Effects**: Custom Galaxy component with particle system (raw WebGL via `ogl`)
+- **Deployment**: Cloudflare Pages (`https://me.jjmowlab.com`)
 
 ## 📂 Project Structure
 
@@ -36,10 +36,12 @@ Me/
 │   ├── data/
 │   │   └── cvData.js          # Centralized CV content (bilingual)
 │   ├── hooks/
-│   │   └── useScrollAnimation.js  # Custom scroll animation hook
+│   │   └── useActiveSection.js # Active section nav tracking
 │   ├── App.jsx                # Main application component
 │   └── main.jsx               # Application entry point
 ├── public/
+│   ├── _redirects             # Cloudflare Pages redirect rules
+│   ├── _headers               # Cloudflare Pages caching & security headers
 │   └── imgs/                  # Images and certificates
 └── dist/                      # Production build output
 ```
@@ -48,7 +50,7 @@ Me/
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js (v18 or higher)
 - npm or yarn
 
 ### Installation
@@ -81,28 +83,15 @@ npm run build
 
 This creates an optimized production build in the `dist/` folder.
 
-### Deploy to GitHub Pages
+### Deployment (Cloudflare Pages)
 
-To update the live deployment:
+The project is hosted on Cloudflare Pages connected to the repository:
+- **Build command**: `npm run build`
+- **Build output directory**: `dist`
+- **Root directory**: `/`
+- **Custom domain**: `me.jjmowlab.com`
 
-```bash
-npm run deploy
-```
-
-Or run both commands sequentially:
-
-```bash
-npm run build
-npm run deploy
-```
-
-This will:
-1. Build the production version
-2. Deploy to GitHub Pages using the `gh-pages` branch
-
-The site will be available at: `https://egger-meow.github.io/Me/`
-
-> **🌐 Live Demo**: Visit the deployed site at [https://egger-meow.github.io/Me/](https://egger-meow.github.io/Me/)
+> **🌐 Live Site**: Visit the deployed site at [https://me.jjmowlab.com/](https://me.jjmowlab.com/)
 
 ## 🎨 Customization
 
@@ -120,8 +109,8 @@ All CV content is centralized in `src/data/cvData.js`. Edit this file to update:
 ### Adding Images/Certificates
 
 1. Place images in the `public/imgs/` folder
-2. Reference them in `cvData.js` using the path: `/Me/imgs/your-image.jpg`
-3. For multiple certificates per experience, use an array: `images: ["/Me/imgs/cert1.jpg", "/Me/imgs/cert2.jpg"]`
+2. Reference them in `cvData.js` using the path: `/imgs/your-image.jpg`
+3. For multiple certificates per experience, use an array: `images: ["/imgs/cert1.jpg", "/imgs/cert2.jpg"]`
 
 ### Styling
 

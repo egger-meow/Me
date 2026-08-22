@@ -1,0 +1,7 @@
+# Redirect legacy GitHub Pages subpaths to root
+/Me/imgs/*   /imgs/:splat   301
+/Me/*        /:splat        301
+/Me          /              301
+
+# SPA routing fallback
+/*           /index.html    200

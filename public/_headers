@@ -1,0 +1,15 @@
+# Production headers for Cloudflare Pages
+
+# Cache hashed assets indefinitely
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache images with revalidation
+/imgs/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Security headers for all pages
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin

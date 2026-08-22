@@ -4,19 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A single-page interactive CV/portfolio built with React 18 + Vite + TailwindCSS + framer-motion, deployed to GitHub Pages at `https://egger-meow.github.io/Me/`. All resume content is bilingual (Chinese/English) and lives in one data file — there is no backend or routing.
+A single-page interactive CV/portfolio built with React 18 + Vite + TailwindCSS + framer-motion, deployed to Cloudflare Pages at `https://me.jjmowlab.com/`. All resume content is bilingual (Chinese/English) and lives in one data file — there is no backend or routing.
 
 ## Commands
 
 ```bash
-npm run dev       # Start Vite dev server (http://localhost:5173/Me/)
+npm run dev       # Start Vite dev server (http://localhost:5173/)
 npm run build     # Production build to dist/
 npm run preview   # Preview the production build locally
 npm run lint      # ESLint (flat config, eslint.config.js)
-npm run deploy    # Build + publish dist/ to the gh-pages branch (predeploy runs build automatically)
 ```
 
-There is no test suite configured in this repo. Note the dev URL includes the `/Me/` base path.
+There is no test suite configured in this repo.
 
 ## Architecture
 
@@ -26,8 +25,8 @@ There is no test suite configured in this repo. Note the dev URL includes the `/
 - **Animation is framer-motion throughout** (no gsap, no manual IntersectionObserver reveals): `SectionReveal` wraps every section with a `whileInView` fade-rise; NavBar's active pill uses `layoutId="nav-active"`; the theme toggle icon morphs via `AnimatePresence`; `ImageModal` animates mount/unmount and directional slides. All entrances share the expo-out easing `[0.16, 1, 0.3, 1]` — keep new animations on that curve for consistent rhythm. `useReducedMotion` gates the hero/section entrances.
 - **`motion` and ESLint**: `<motion.div>` JSX member expressions aren't counted as usage by core `no-unused-vars`, so `eslint.config.js` whitelists `^motion$` in `varsIgnorePattern`.
 - **Active-section nav tracking** lives in [src/hooks/useActiveSection.js](src/hooks/useActiveSection.js) — an IntersectionObserver over `#section-<key>` elements. Sections carry `id="section-<key>"` + `data-section-key`; nav click scrolls via `scrollIntoView` with the `scroll-mt-36` class handling the fixed-header offset (header height changes must update that class).
-- **PhotoSlot** ([src/components/shared/PhotoSlot.jsx](src/components/shared/PhotoSlot.jsx)) renders an image or, if the src is missing/404s, a deliberate dashed-border placeholder. The hero portrait (`/Me/imgs/hero/portrait.jpg`) and any missing project screenshots use this — dropping a correctly-named file into `public/imgs/` fills the slot with no code change.
-- **Images**: static assets in `public/imgs/` (certificates at the root, project screenshots in `projects/`, portrait in `hero/`). Because Vite's `base` is `/Me/` ([vite.config.js](vite.config.js)), all image paths in `cvData.js` are absolute `/Me/imgs/<file>` — never relative imports.
+- **PhotoSlot** ([src/components/shared/PhotoSlot.jsx](src/components/shared/PhotoSlot.jsx)) renders an image or, if the src is missing/404s, a deliberate dashed-border placeholder. The hero portrait (`/imgs/hero/portrait.jpg`) and any missing project screenshots use this — dropping a correctly-named file into `public/imgs/` fills the slot with no code change.
+- **Images**: static assets in `public/imgs/` (certificates at the root, project screenshots in `projects/`, portrait in `hero/`). Image paths in `cvData.js` are absolute `/imgs/<file>` from the root.
 - **Design tokens** in [tailwind.config.js](tailwind.config.js): `font-display` (Space Grotesk) for headings/names, `font-sans` (Inter) body, `font-mono` (JetBrains Mono) for labels/tags/dates/periods — all with Noto Sans TC fallback for Chinese. Glow shadows (`shadow-glow-emerald` etc.) and keyframes (`aurora`, `pulse-ring`, `shimmer`) are defined there. Fonts load from Google Fonts in [index.html](index.html).
 - **Dark/light theming** is the `isDark` boolean with `isDark ? '...' : '...'` ternaries (not Tailwind's `dark:` variant). Dark is the default theme and the signature look; the WebGL Galaxy background ([src/components/Galaxy.jsx](src/components/Galaxy.jsx), raw `ogl` + GLSL) mounts only in dark mode for performance. Identity palette: emerald (primary accent), purple (secondary), amber (tertiary) over slate.
 - **PDF export** uses `react-to-print` on the `resumeRef` wrapping the resume card; print styles live in [src/index.css](src/index.css) (`@media print` forces black-on-transparent).
