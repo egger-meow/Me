@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, Monitor, BookOpen } from 'lucide-react';
 import SectionHeading from '../shared/SectionHeading';
 import PhotoSlot from '../shared/PhotoSlot';
 import TiltCard from '../shared/TiltCard';
@@ -15,6 +15,24 @@ const StackChip = ({ label, isDark }) => (
   >
     {label}
   </span>
+);
+
+const actionIcon = { github: Github, docs: BookOpen, live: Monitor };
+const ProjectActions = ({ actions, isDark }) => (
+  <div className="flex flex-wrap gap-2">
+    {actions.map((action, index) => {
+      const Icon = actionIcon[action.type] || ExternalLink;
+      const primary = index === 0 && action.type === 'live';
+      return (
+        <motion.a key={action.href} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href={action.href} target="_blank" rel="noopener noreferrer"
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${primary
+            ? (isDark ? 'bg-emerald-500 text-slate-950 border-emerald-300 hover:bg-emerald-400' : 'bg-gray-900 text-white border-gray-900 hover:bg-gray-800')
+            : (isDark ? 'bg-slate-800/70 text-slate-200 border-slate-600 hover:border-emerald-500/50' : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400')}`}>
+          <Icon size={15} />{action.label}<ExternalLink size={12} />
+        </motion.a>
+      );
+    })}
+  </div>
 );
 
 // Browser-frame treatment shared by every featured system screenshot.
@@ -131,22 +149,7 @@ const SystemsShowcase = ({ section, isDark, index }) => (
                   ))}
                 </div>
 
-                <motion.a
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  href={system.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-colors cursor-pointer ${
-                    isDark
-                      ? 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border-emerald-500/25'
-                      : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border-gray-200'
-                  }`}
-                >
-                  <Github size={15} />
-                  {system.id}
-                  <ExternalLink size={13} />
-                </motion.a>
+                <ProjectActions actions={system.actions} isDark={isDark} />
               </div>
             </div>
           </div>
@@ -160,16 +163,12 @@ const SystemsShowcase = ({ section, isDark, index }) => (
         isDark ? 'text-purple-300' : 'text-purple-600'
       }`}
     >
-      {section.explorationsTitle}
+      {section.selectedTitle}
     </h4>
     <div className="grid sm:grid-cols-2 gap-4">
-      {section.explorations.map((project) => (
+      {section.selected.map((project) => (
         <TiltCard
           key={project.name}
-          as="a"
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
           maxTilt={6}
           lift={-4}
           spotlightColor={isDark ? 'rgba(168, 85, 247, 0.12)' : 'rgba(168, 85, 247, 0.07)'}
@@ -183,7 +182,7 @@ const SystemsShowcase = ({ section, isDark, index }) => (
             <h5 className={`font-display font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
               {project.name}
             </h5>
-            <Github size={15} className={isDark ? 'text-slate-400' : 'text-gray-400'} />
+            <span className={`font-mono text-[10px] uppercase tracking-wider ${isDark ? 'text-purple-300' : 'text-purple-600'}`}>{project.status}</span>
           </div>
           <p className={`text-sm leading-relaxed mb-3 ${isDark ? 'text-slate-300' : 'text-gray-600'}`}>
             {project.description}
@@ -193,6 +192,7 @@ const SystemsShowcase = ({ section, isDark, index }) => (
               <StackChip key={tech} label={tech} isDark={isDark} />
             ))}
           </div>
+          <div className="mt-4"><ProjectActions actions={project.actions} isDark={isDark} /></div>
         </TiltCard>
       ))}
     </div>

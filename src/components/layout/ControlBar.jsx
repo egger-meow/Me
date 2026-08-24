@@ -29,7 +29,7 @@ const ControlBar = ({
         {language === 'zh' ? '侯均頲' : 'Chun-Ting Hou'}
         <span className={`hidden sm:inline font-mono text-xs font-normal ml-3 tracking-widest ${isDark ? 'text-emerald-300/70' : 'text-emerald-600/80'
           }`}>
-          {language === 'zh' ? 'BUILDER · RESEARCHER' : 'BUILDER · RESEARCHER'}
+          PRODUCT · SYSTEMS · SOFTWARE
         </span>
       </h1>
       <div className="flex gap-2 sm:gap-3">

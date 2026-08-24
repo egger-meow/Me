@@ -12,26 +12,16 @@ import Hero from './components/sections/Hero';
 import SystemsShowcase from './components/sections/SystemsShowcase';
 import Experience from './components/sections/Experience';
 import Education from './components/sections/Education';
-import ResearchDirection from './components/sections/ResearchDirection';
 import Skills from './components/sections/Skills';
-import AcademicProjects from './components/sections/AcademicProjects';
-import HowIBuild from './components/sections/HowIBuild';
-import Extracurricular from './components/sections/Extracurricular';
-import Languages from './components/sections/Languages';
-import Personality from './components/sections/Personality';
+import About from './components/sections/About';
 import { useActiveSection } from './hooks/useActiveSection';
 
 const SECTION_COMPONENTS = {
   systems: SystemsShowcase,
   experience: Experience,
   education: Education,
-  research: ResearchDirection,
   skills: Skills,
-  academic: AcademicProjects,
-  howIBuild: HowIBuild,
-  extracurricular: Extracurricular,
-  languages: Languages,
-  personality: Personality,
+  about: About,
 };
 
 function App() {

@@ -1,10 +1,10 @@
-import { ExternalLink, Image } from 'lucide-react';
+import { ExternalLink, Image, FlaskConical } from 'lucide-react';
 import SectionHeading from '../shared/SectionHeading';
 
 const Education = ({ section, isDark, index, onOpenImages, language }) => (
   <>
     <SectionHeading index={index} title={section.title} isDark={isDark} />
-    {section.content.map((edu, idx) => (
+    {section.education.map((edu, idx) => (
       <div key={idx} className="mb-8 last:mb-0">
         <div className="flex flex-wrap justify-between items-start gap-x-4 mb-2">
           <div className="min-w-0">
@@ -75,6 +75,19 @@ const Education = ({ section, isDark, index, onOpenImages, language }) => (
         </div>
       </div>
     ))}
+    <div className={`mt-8 grid md:grid-cols-2 gap-4`}>
+      <div className={`rounded-xl border p-5 ${isDark ? 'bg-purple-950/20 border-purple-800/40' : 'bg-purple-50/50 border-purple-200'}`}>
+        <div className="flex items-center gap-2 mb-2"><FlaskConical size={18} className={isDark ? 'text-purple-300' : 'text-purple-600'} /><h3 className={`font-display font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>{language === 'zh' ? '研究方向' : 'Research Direction'}</h3></div>
+        <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-300' : 'text-gray-700'}`}>{section.researchIntro}</p>
+        <p className={`mt-3 text-xs font-mono leading-relaxed ${isDark ? 'text-amber-300/90' : 'text-amber-700'}`}>{section.researchTodo}</p>
+      </div>
+      <div className={`rounded-xl border p-5 ${isDark ? 'bg-slate-800/50 border-slate-700' : 'bg-white border-gray-200 shadow-sm'}`}>
+        <span className={`font-mono text-[10px] uppercase tracking-wider ${isDark ? 'text-emerald-300' : 'text-emerald-700'}`}>{section.academic.status}</span>
+        <h3 className={`font-display font-semibold mt-2 mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{section.academic.name}</h3>
+        <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-300' : 'text-gray-700'}`}>{section.academic.description}</p>
+        <a href={section.academic.link} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 mt-3 text-sm ${isDark ? 'text-emerald-300' : 'text-emerald-700'}`}>{language === 'zh' ? '查看專題資料' : 'View Project Material'}<ExternalLink size={13} /></a>
+      </div>
+    </div>
   </>
 );
 

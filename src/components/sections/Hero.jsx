@@ -1,5 +1,5 @@
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { Mail, Phone, MapPin, Github, Linkedin, Download } from 'lucide-react';
+import { Mail, MapPin, Github, Linkedin, Download } from 'lucide-react';
 import PhotoSlot from '../shared/PhotoSlot';
 import Magnetic from '../shared/Magnetic';
 import CountUp from '../shared/CountUp';
@@ -93,10 +93,6 @@ const Hero = ({ data, isDark, onDownloadPDF }) => {
               <Mail size={15} />
               {contact.email}
             </a>
-            <span className="flex items-center gap-1.5">
-              <Phone size={15} />
-              {contact.phone}
-            </span>
             <a
               href={`https://${contact.linkedin}`}
               target="_blank"
