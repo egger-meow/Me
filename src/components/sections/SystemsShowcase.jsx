@@ -35,41 +35,98 @@ const ProjectActions = ({ actions, isDark }) => (
   </div>
 );
 
-// Browser-frame treatment shared by every featured system screenshot.
-const ScreenshotFrame = ({ system, isDark }) => (
-  <div
-    className={`rounded-xl overflow-hidden border transition-colors duration-300 ${
-      isDark ? 'border-slate-600/50 bg-slate-900/60' : 'border-gray-200 bg-white'
-    }`}
-  >
+// Device-aware frame treatment: browser window for web apps, mobile phone frame for mobile apps.
+const ScreenshotFrame = ({ system, isDark, onOpenImages }) => {
+  const isMobile = system.device === 'mobile';
+
+  if (isMobile) {
+    return (
+      <div className="flex justify-center w-full">
+        <div
+          onClick={() =>
+            onOpenImages?.({
+              urls: [system.screenshot],
+              alt: system.name,
+              titles: [system.screenshotLabel],
+            })
+          }
+          className={`group/frame relative w-full max-w-[240px] sm:max-w-[260px] rounded-[2.2rem] p-2.5 border-2 shadow-2xl transition-all duration-300 cursor-zoom-in ${
+            isDark
+              ? 'bg-slate-950 border-slate-700/80 hover:border-emerald-500/50 hover:shadow-glow-emerald'
+              : 'bg-gray-900 border-gray-800 hover:border-emerald-500/50 hover:shadow-xl'
+          }`}
+        >
+          {/* Dynamic Island / Speaker Pill */}
+          <div className="flex justify-center mb-2">
+            <div className="w-16 h-3.5 bg-slate-900 border border-slate-800 rounded-full flex items-center justify-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-950" />
+              <div className="w-2.5 h-1 rounded-full bg-slate-950" />
+            </div>
+          </div>
+          {/* Screen content */}
+          <div className="rounded-[1.4rem] overflow-hidden bg-slate-900 border border-slate-800/80">
+            <PhotoSlot
+              src={system.screenshot}
+              alt={`${system.name} screenshot`}
+              isDark={isDark}
+              label={system.screenshotLabel}
+              rounded="rounded-none"
+              className="w-full h-auto max-h-[380px] object-cover object-top transition-transform duration-500 group-hover/frame:scale-105"
+            />
+          </div>
+          {/* Home indicator bar */}
+          <div className="w-16 h-1 bg-slate-700/60 rounded-full mx-auto mt-2" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
     <div
-      className={`flex items-center gap-1.5 px-3 py-2 border-b ${
-        isDark ? 'border-slate-700/60' : 'border-gray-100'
+      onClick={() =>
+        onOpenImages?.({
+          urls: [system.screenshot],
+          alt: system.name,
+          titles: [system.screenshotLabel],
+        })
+      }
+      className={`group/frame rounded-xl overflow-hidden border transition-all duration-300 cursor-zoom-in ${
+        isDark
+          ? 'border-slate-600/50 bg-slate-900/60 hover:border-emerald-500/40 hover:shadow-glow-emerald'
+          : 'border-gray-200 bg-white hover:border-emerald-400/50 hover:shadow-md'
       }`}
     >
-      <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-      <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
-      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
-      <span
-        className={`font-mono text-[10px] ml-2 truncate ${
-          isDark ? 'text-slate-500' : 'text-gray-400'
+      <div
+        className={`flex items-center gap-1.5 px-3 py-2 border-b ${
+          isDark ? 'border-slate-700/60 bg-slate-900/80' : 'border-gray-100 bg-gray-50/80'
         }`}
       >
-        {system.id}
-      </span>
+        <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+        <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
+        <span
+          className={`font-mono text-[10px] ml-2 truncate ${
+            isDark ? 'text-slate-500' : 'text-gray-400'
+          }`}
+        >
+          {system.id}
+        </span>
+      </div>
+      <div className="overflow-hidden">
+        <PhotoSlot
+          src={system.screenshot}
+          alt={`${system.name} screenshot`}
+          isDark={isDark}
+          label={system.screenshotLabel}
+          rounded="rounded-none"
+          className="w-full aspect-video object-cover object-top transition-transform duration-500 group-hover/frame:scale-105"
+        />
+      </div>
     </div>
-    <PhotoSlot
-      src={system.screenshot}
-      alt={`${system.name} screenshot`}
-      isDark={isDark}
-      label={system.screenshotLabel}
-      rounded="rounded-none"
-      className="w-full aspect-video object-cover object-top"
-    />
-  </div>
-);
+  );
+};
 
-const SystemsShowcase = ({ section, isDark, index }) => (
+const SystemsShowcase = ({ section, isDark, index, onOpenImages }) => (
   <>
     <SectionHeading index={index} title={section.title} isDark={isDark} />
     <p className={`mb-8 max-w-2xl leading-relaxed ${isDark ? 'text-slate-300' : 'text-gray-600'}`}>
@@ -91,11 +148,11 @@ const SystemsShowcase = ({ section, isDark, index }) => (
           }`}
         >
           <div className="p-6 md:p-8">
-            <div className={`grid gap-6 lg:grid-cols-5 lg:items-start`}>
+            <div className={`grid gap-6 lg:grid-cols-5 lg:items-center`}>
               {/* Screenshot */}
-              <div className={`lg:col-span-2 ${idx % 2 === 1 ? 'lg:order-last' : ''}`}>
-                <Parallax range={12}>
-                  <ScreenshotFrame system={system} isDark={isDark} />
+              <div className={`lg:col-span-2 ${idx % 2 === 1 ? 'lg:order-last' : ''} flex justify-center`}>
+                <Parallax range={10} className="w-full max-w-md">
+                  <ScreenshotFrame system={system} isDark={isDark} onOpenImages={onOpenImages} />
                 </Parallax>
               </div>
 
