@@ -13,11 +13,13 @@ import SystemsShowcase from './components/sections/SystemsShowcase';
 import Experience from './components/sections/Experience';
 import Education from './components/sections/Education';
 import Skills from './components/sections/Skills';
+import Autobiography from './components/sections/Autobiography';
 import About from './components/sections/About';
 import { useActiveSection } from './hooks/useActiveSection';
 
 const SECTION_COMPONENTS = {
   systems: SystemsShowcase,
+  story: Autobiography,
   experience: Experience,
   education: Education,
   skills: Skills,
