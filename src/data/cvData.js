@@ -226,7 +226,7 @@ export const cvData = {
         education: [
           {
             school: '國立陽明交通大學（NYCU）',
-            degree: '資料科學與工程研究所 碩士班',
+            degree: '數據科學與工程研究所 碩士班',
             period: '2026.09 — 2028.06（預計）',
             details: [
               '已錄取 115 學年度碩士班；已確立指導教授，研究方向聚焦自然語言處理（NLP）、資訊檢索（IR）、大型語言模型（LLM）與 Agent 系統。'
