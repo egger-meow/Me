@@ -55,7 +55,7 @@ const zhStory = {
       summary: '從小培養扎實的數理邏輯，大學由管理科學系主動跨域雙主修資訊工程學系，打下嚴謹的演算法、資料結構與系統實作基礎。',
       paragraphs: [
         '國中會考以 5A9+（作文五級分）錄取新竹高中第一志願（達建中錄取標準），並在國中 AMC8、高中 AMC12 均取得 PR97 獲得 AIME 邀請資格。這段數理訓練讓我習慣以邏輯與結構思考問題。',
-        '進入國立陽明交通大學後，我從管理科學系出發，主動申請並完成資訊工程學系雙主修。比起單純的天賦標籤，我更在乎的是將理解力轉化為實質產出的工程能力，並以優異成績錄取陽明交大數據科學與工程研究所碩士班。'
+        '進入國立陽明交通大學後，我從管理科學系出發，主動申請並完成資訊工程學系雙主修。比起單純的天賦標籤，我更在乎的是將理解力轉化為實質產出的工程能力，並進入陽明交大數據科學與工程研究所碩士班深造。'
       ],
       highlights: [
         '5A9+ 錄取新竹高中（達建中標準）',
@@ -127,7 +127,7 @@ const enStory = {
       summary: 'Built strong mathematical intuition from early on, entering NYCU in Management Science and completing a double major in Computer Science with rigorous systems and algorithmic depth.',
       paragraphs: [
         'Scored 5A9+ (essay score 5) on the Comprehensive Assessment Program, admitting to National Hsinchu High School (meeting Taipei First Girls/Jianguo High School admission benchmarks), with 97th percentile scores in AMC8 and AMC12 earning AIME invitations. This solid mathematical background formed my analytical thinking.',
-        'At National Yang Ming Chiao Tung University (NYCU), I started in Management Science and proactively pursued and completed a Double Major in Computer Science. Valuing practical delivery over labels, I earned an A+ in Intro to AI (ranked 2/113) and gained admission to NYCU’s graduate Institute of Data Science and Engineering.'
+        'At National Yang Ming Chiao Tung University (NYCU), I started in Management Science and proactively pursued and completed a Double Major in Computer Science. Valuing practical delivery over labels, I earned an A+ in Intro to AI (ranked 2/113) and continued into the M.S. program at NYCU’s Institute of Data Science and Engineering.'
       ],
       highlights: [
         '5A9+ Admission to Hsinchu High (Jianguo benchmark)',
@@ -194,7 +194,7 @@ export const cvData = {
     hero: {
       kicker: 'PRODUCT + SYSTEMS BUILDER',
       tagline: '我把問題做成真正能用的產品與系統',
-      subline: '陽明交大管科系雙主修資工系背景，曾在台積電與智邦科技參與軟體與 AI 系統開發，目前朝數據科學與工程研究所深造。從需求釐清、產品設計到可靠交付，我在意的是讓技術真的解決問題。',
+      subline: '陽明交大管科系雙主修資工系畢業，曾在台積電與智邦科技參與軟體與 AI 系統開發，目前就讀陽明交大數據科學與工程研究所碩士班。從需求釐清、產品設計到可靠交付，我在意的是讓技術真的解決問題。',
       photo: '/imgs/hero/portrait.jpg',
       photoLabel: '個人照片',
       stats: [
@@ -227,9 +227,9 @@ export const cvData = {
           {
             school: '國立陽明交通大學（NYCU）',
             degree: '數據科學與工程研究所 碩士班',
-            period: '2026.09 — 2028.06（預計）',
+            period: '2026.09 — 現在（預計 2028.06 畢業）',
             details: [
-              '已錄取 115 學年度碩士班；已確立指導教授，研究方向聚焦自然語言處理（NLP）、資訊檢索（IR）、大型語言模型（LLM）與 Agent 系統。'
+              '現就讀 115 學年度碩士班；研究方向聚焦自然語言處理（NLP）、資訊檢索（IR）、大型語言模型（LLM）與 Agent 系統。'
             ]
           },
           {
@@ -247,7 +247,7 @@ export const cvData = {
             ]
           }
         ],
-        researchIntro: '已確立研究所指導教授，未來研究方向聚焦自然語言處理（NLP）、資訊檢索（Information Retrieval）、大型語言模型（LLM）與智慧代理（Agent）系統。',
+        researchIntro: '目前就讀碩士班並於實驗室深入研究，研究方向聚焦自然語言處理（NLP）、資訊檢索（Information Retrieval）、大型語言模型（LLM）與智慧代理（Agent）系統。',
         researchTodo: '研究焦點：結合大型語言模型、資訊檢索與 Agent 架構，探索高可靠度與實用性的智慧系統。',
         academic: {
           name: '日立永大電梯產學合作專題',
@@ -286,7 +286,7 @@ export const cvData = {
     hero: {
       kicker: 'PRODUCT + SYSTEMS BUILDER',
       tagline: 'I turn real problems into products and systems that work.',
-      subline: 'NYCU graduate with a double major in Management Science and Computer Science, with software and applied-AI experience at TSMC and Accton, now heading toward graduate study in Data Science and Engineering. I work from problem framing and product design through reliable delivery.',
+      subline: 'NYCU graduate with a double major in Management Science and Computer Science, with software and applied-AI experience at TSMC and Accton, currently pursuing an M.S. in Data Science and Engineering at NYCU. I work from problem framing and product design through reliable delivery.',
       photo: '/imgs/hero/portrait.jpg',
       photoLabel: 'Portrait',
       stats: [
@@ -318,10 +318,10 @@ export const cvData = {
         education: [
           {
             school: 'National Yang Ming Chiao Tung University (NYCU)',
-            degree: 'M.S. path, Institute of Data Science and Engineering',
-            period: 'Sep 2026 — Jun 2028 (expected)',
+            degree: 'M.S. in Data Science and Engineering',
+            period: 'Sep 2026 — Present (Expected Jun 2028)',
             details: [
-              'Admitted for the 2026 academic year. Advising professor confirmed; research focus centers on Natural Language Processing (NLP), Information Retrieval (IR), Large Language Models (LLM), and Agent systems.'
+              'Currently enrolled in the M.S. program; research focus centers on Natural Language Processing (NLP), Information Retrieval (IR), Large Language Models (LLM), and Agent systems.'
             ]
           },
           {
@@ -339,7 +339,7 @@ export const cvData = {
             ]
           }
         ],
-        researchIntro: 'Advising professor confirmed; graduate research focus centers on Natural Language Processing (NLP), Information Retrieval (IR), Large Language Models (LLM), and Agent systems.',
+        researchIntro: 'Currently pursuing Master’s research focused on Natural Language Processing (NLP), Information Retrieval (IR), Large Language Models (LLM), and Agent systems.',
         researchTodo: 'Research Focus: Combining LLMs, Information Retrieval, and Agent architectures for reliable, practical intelligent systems.',
         academic: {
           name: 'Hitachi Yungtay Elevator Industry–Academia Collaboration',
