@@ -230,7 +230,10 @@ export const cvData = {
             period: '2026.09 — 現在（預計 2028.06 畢業）',
             details: [
               '現就讀 115 學年度碩士班；研究方向聚焦自然語言處理（NLP）、資訊檢索（IR）、大型語言模型（LLM）與 Agent 系統。'
-            ]
+            ],
+            images: ['/imgs/std_applyprove_stu.jpg'],
+            imageLabel: '查看在學證明',
+            imageTitles: ['在學證明書']
           },
           {
             school: '國立陽明交通大學（NYCU）',
@@ -322,7 +325,10 @@ export const cvData = {
             period: 'Sep 2026 — Present (Expected Jun 2028)',
             details: [
               'Currently enrolled in the M.S. program; research focus centers on Natural Language Processing (NLP), Information Retrieval (IR), Large Language Models (LLM), and Agent systems.'
-            ]
+            ],
+            images: ['/imgs/std_applyprove_stu.jpg'],
+            imageLabel: 'View Enrollment Certificate',
+            imageTitles: ['Certificate of Enrollment']
           },
           {
             school: 'National Yang Ming Chiao Tung University (NYCU)',

@@ -42,7 +42,13 @@ const Education = ({ section, isDark, index, onOpenImages, language }) => (
         <div className="flex flex-wrap gap-2 mt-3">
           {edu.images && edu.images.length > 0 && (
             <button
-              onClick={() => onOpenImages({ urls: edu.images, alt: edu.school })}
+              onClick={() =>
+                onOpenImages({
+                  urls: edu.images,
+                  alt: `${edu.school} ${edu.imageLabel || (language === 'zh' ? '在學證明' : 'Certificate')}`,
+                  titles: edu.imageTitles || (edu.imageLabel ? [edu.imageLabel] : [language === 'zh' ? '在學證明' : 'Certificate of Enrollment']),
+                })
+              }
               className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm border transition-colors cursor-pointer ${
                 isDark
                   ? 'bg-slate-700/70 hover:bg-slate-600/70 text-slate-200 border-slate-600'
@@ -50,7 +56,7 @@ const Education = ({ section, isDark, index, onOpenImages, language }) => (
               }`}
             >
               <Image size={15} />
-              {language === 'zh' ? '查看證書' : 'View Certificates'}
+              {edu.imageLabel || (language === 'zh' ? '查看證書' : 'View Certificates')}
             </button>
           )}
           {edu.diplomas && edu.diplomas.length > 0 && (
